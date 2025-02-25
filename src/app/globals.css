@@ -2,20 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Varsayılan renk tanımı */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --main-color: #171717;
+  --primary-dark: #352f44;
+  --secondary-dark: #5c5470;
+  --primary-light: #b9b4c7;
+  --secondary-light: #faf0e6;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Light tema için varsayılan renkler */
+:root[data-theme='light'] {
+  --background: var(--secondary-light);
+  --text: var(--primary-dark);
+  --secondary-bg: var(--primary-light);
+  --accent: var(--secondary-dark);
+}
+
+/* Dark tema için renkler */
+:root[data-theme='dark'] {
+  --background: var(--primary-dark);
+  --text: var(--secondary-light);
+  --secondary-bg: var(--secondary-dark);
+  --accent: var(--primary-light);
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--background);
+  color: var(--text);
+  transition: background-color 0.3s ease-in-out;
 }
