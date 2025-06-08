@@ -1,46 +1,24 @@
 'use client';
 import { SunMoon } from 'lucide-react';
-import { useLayoutEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useTheme } from '@/app/theme-provider';
 
 const navItems = [
   { name: 'Ana sayfa', path: '/' },
   { name: 'Popüler', path: '/Popular' },
   { name: 'Yeni', path: '/New' },
-  { name: 'Okuma listesi', path: '/ReadingList' }
+  { name: 'Okuma listesi', path: '/ReadingList' },
+  { name: '404', path: '/404' }
 ];
 
 export default function Header() {
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const pathname = usePathname();
 
-  useLayoutEffect(() => {
-    // Başlangıç değerini HTML'den al
-    const initialTheme = document.documentElement.getAttribute('data-theme') as
-      | 'light'
-      | 'dark';
-    setTheme(initialTheme || 'dark');
-  }, []);
-
-  const toggleTheme = async () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-
-    document.documentElement.setAttribute('data-theme', newTheme);
-    setTheme(newTheme);
-
-    // API'ye tema değişikliğini bildir
-    await fetch('/api/theme', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ theme: newTheme })
-    });
-  };
+  const { toggleTheme } = useTheme();
 
   return (
-    <header className="container pb-[98px] pt-[60px]">
+    <header className="container pt-[60px] pb-[98px]">
       <div className="container mx-auto flex items-center justify-between">
         <h1 className="text-[24px] font-bold text-[var(--text)]">PEKAFİLLİ</h1>
         <div className="flex w-full items-center justify-end gap-8">
@@ -62,7 +40,7 @@ export default function Header() {
           </ul>
           <button
             onClick={toggleTheme}
-            className="rounded-md bg-[var(--accent)] px-4 py-2 text-[var(--background)]"
+            className="cursor-pointer rounded-md bg-[var(--accent)] px-4 py-2 text-[var(--background)]"
           >
             <SunMoon />
           </button>
