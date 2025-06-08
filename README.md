@@ -57,8 +57,8 @@ src/
 ## ⚙️ Kurulum
 
 ```bash
-git clone https://github.com/kullaniciadi/pek-afilli-v2.git
-cd pek-afilli-v2
+git clone https://github.com/ramazandogna/lang-4-reason.git
+cd lang-4-reason
 pnpm install
 pnpm dev
 ```
