@@ -1,14 +1,16 @@
+import '../styles/globals.css';
 import type { Metadata } from 'next';
 import { Open_Sans } from 'next/font/google';
-import { cookies } from 'next/headers';
-import '../styles/globals.css';
+import { getInitialTheme } from '@/lib/getInitialTheme';
+import { ThemeProvider } from './theme-provider';
 import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 const openSans = Open_Sans({
-  variable: '--font-open-sans', // Open Sans için CSS değişkeni tanımlıyoruz
+  variable: '--font-open-sans',
   subsets: ['latin'],
-  weight: ['300', '400', '600', '700'], // Kullanılacak font ağırlıkları
-  display: 'swap' // Performans için önerilen ayar
+  weight: ['300', '400', '600', '700'],
+  display: 'swap'
 });
 
 export const metadata: Metadata = {
@@ -18,26 +20,23 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
-  // Cookie'den tema bilgisini al
-  const cookieStore = await cookies();
-  const theme = cookieStore.get('theme');
-  const initialTheme = theme?.value || 'light';
+}) {
+  const theme = await getInitialTheme();
 
   return (
-    <html
-      lang="en"
-      data-theme={initialTheme}
-      style={{ '--main-color': '#171717' } as React.CSSProperties}
-    >
-      <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-      </head>
-      <body className={`${openSans.variable} antialiased`}>
-        <Header />
-        {children}
+    <html lang="en" data-theme={theme} className={openSans.variable}>
+      <body className="flex min-h-screen flex-col bg-[var(--background)] text-[var(--text)] transition-colors duration-300">
+        <ThemeProvider defaultTheme={theme}>
+          <Header />
+
+          <main className="container w-full flex-1 px-4 py-6 md:px-8">
+            {children}
+          </main>
+
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );
