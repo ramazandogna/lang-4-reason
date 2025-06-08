@@ -1,7 +1,7 @@
 import '../styles/globals.css';
 import type { Metadata } from 'next';
 import { Open_Sans } from 'next/font/google';
-import { getInitialTheme } from '@/lib/getInitialTheme';
+import { getInitialTheme } from '@/lib/get-initial-theme';
 import { ThemeProvider } from './theme-provider';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
