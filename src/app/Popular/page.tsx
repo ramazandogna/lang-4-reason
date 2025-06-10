@@ -1,7 +1,7 @@
 export default function PopularPage() {
   return (
-    <div className="container">
-      <h1>Popüler İçerikler</h1>
+    <div>
+      <h1>Popüler</h1>
     </div>
   );
 }
