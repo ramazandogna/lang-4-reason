@@ -3,49 +3,94 @@ import { SunMoon } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTheme } from '@/app/theme-provider';
+import HamburgerIcon from '../ui/HamburgerIcon';
+import { useState } from 'react';
 
 const navItems = [
   { name: 'Ana sayfa', path: '/' },
+  { name: 'Yeni', path: '/new' },
   { name: 'Popüler', path: '/Popular' },
-  { name: 'Yeni', path: '/New' },
-  { name: 'Okuma listesi', path: '/ReadingList' },
-  { name: '404', path: '/404' }
+  { name: 'Okuma listesi', path: '/ReadingList' }
 ];
 
 export default function Header() {
   const pathname = usePathname();
-
+  const [open, setOpen] = useState(false);
   const { toggleTheme } = useTheme();
 
   return (
-    <header className="container pt-[60px] pb-[98px]">
-      <div className="container mx-auto flex items-center justify-between">
-        <h1 className="text-[24px] font-bold text-[var(--text)]">PEKAFİLLİ</h1>
-        <div className="flex w-full items-center justify-end gap-8">
-          <ul className="flex items-center justify-center gap-8 font-semibold">
-            {navItems.map((item) => (
-              <li key={item.name}>
-                <Link
-                  href={item.path}
-                  className={`cursor-pointer rounded px-4 py-2 ${
-                    pathname === item.path
-                      ? 'bg-[var(--accent)] text-[var(--background)] transition-colors'
-                      : ''
-                  }`}
-                >
-                  {item.name}
+    <>
+      <header className="flex h-20 w-full items-center justify-center pt-6 max-md:h-18">
+        <div className="container mx-auto flex w-full items-center justify-between">
+          <div className="flex gap-12">
+            <Link href="/">
+              <div className="text-3xl font-bold">Logo</div>
+            </Link>
+            <ul className="text-md flex items-center justify-center gap-8 font-bold max-md:hidden">
+              {navItems.slice(1).map((item) => (
+                <Link key={item.path} href={item.path}>
+                  <li className="my-auto">{item.name}</li>
                 </Link>
-              </li>
-            ))}
-          </ul>
-          <button
-            onClick={toggleTheme}
-            className="cursor-pointer rounded-md bg-[var(--accent)] px-4 py-2 text-[var(--background)]"
-          >
-            <SunMoon />
-          </button>
+              ))}
+            </ul>
+          </div>
+          <div className="flex items-center justify-center gap-2">
+            <div className="max-md:hidden">Button 1</div>
+            <div className="max-md:hidden">Button 2</div>
+            <span className="md:hidden">
+              <HamburgerIcon checked={open} onChange={setOpen} />
+            </span>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+
+      {/* Mobile Menu */}
+      {open && (
+        <div className="fixed inset-0 z-40 md:hidden">
+          <div
+            className="fixed inset-0 bg-white/20 backdrop-blur-sm dark:bg-black/20"
+            onClick={() => setOpen(false)}
+          />
+          <div
+            className="fixed top-0 right-0 h-full w-80 transform transition-all duration-500 ease-in-out"
+            style={{
+              backgroundColor: 'var(--background)',
+              transform: open ? 'translateX(0)' : 'translateX(100%)',
+              opacity: open ? '1' : '0'
+            }}
+          >
+            <div className="p-6">
+              {/* Header with Logo and Close Button */}
+              <div className="mb-6 flex items-center justify-between">
+                <Link href="/" onClick={() => setOpen(false)}>
+                  <div
+                    className="text-3xl font-bold"
+                    style={{ color: 'var(--text)' }}
+                  >
+                    Logo
+                  </div>
+                </Link>
+                <HamburgerIcon checked={open} onChange={setOpen} />
+              </div>
+
+              <ul className="space-y-6">
+                {navItems.map((item) => (
+                  <li key={item.path}>
+                    <Link href={item.path} onClick={() => setOpen(false)}>
+                      <div
+                        className="text-lg font-bold"
+                        style={{ color: 'var(--text)' }}
+                      >
+                        {item.name}
+                      </div>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
