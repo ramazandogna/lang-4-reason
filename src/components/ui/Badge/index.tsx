@@ -1,3 +1,2 @@
-export default function Badge() {
-  return <div></div>;
-}
+export { default as Badge } from './Badge';
+export * from './Badge.types';
