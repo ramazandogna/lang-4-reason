@@ -1,5 +1,9 @@
 function Footer() {
-  return <div>Footer</div>;
+  return (
+    <div>
+      <span className="container mx-auto flex w-full">Footer</span>
+    </div>
+  );
 }
 
 export default Footer;

@@ -12,7 +12,8 @@ const navItems = [
   { name: 'Ana sayfa', path: '/' },
   { name: 'Yeni', path: '/new' },
   { name: 'Popüler', path: '/Popular' },
-  { name: 'Okuma listesi', path: '/ReadingList' }
+  { name: 'Okuma listesi', path: '/ReadingList' },
+  { name: 'Typography', path: '/Typography' }
 ];
 
 export default function Header() {
@@ -41,7 +42,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-0 right-0 left-0 z-50 mb-20 flex h-20 w-full items-center justify-center bg-[var(--background)] shadow shadow-white/20 max-md:h-18">
+      <header className="fixed top-0 right-0 left-0 z-50 flex h-20 w-full items-center justify-center bg-[var(--background)]/60 backdrop-blur-lg max-md:h-18">
         <div className="container mx-auto flex w-full items-center justify-between">
           <div className="flex gap-12">
             <Link href="/">
@@ -59,18 +60,17 @@ export default function Header() {
             <Button className="max-md:hidden" variant="secondary">
               İletişime Geç
             </Button>
-            <Button className="max-md:hidden" variant="primary" color="theme">
+            <Button className="max-md:hidden" variant="primary" color="gray">
               Ücretsiz Dene
             </Button>
             <Button
+              iconOnly
+              leftIcon={<SunMoon className="h-6 w-6" />}
               variant="primary"
-              className={
-                'flex h-10! w-10! items-center justify-center bg-[var(--text)]! p-0 text-[var(--background)]! max-md:mr-4'
-              }
+              className="max-md:hidden"
+              color="theme"
               onClick={toggleTheme}
-            >
-              <SunMoon className="h-6 w-6" />
-            </Button>
+            />
             <span className="md:hidden">
               <HamburgerIcon checked={open} onChange={setOpen} />
             </span>
@@ -88,7 +88,7 @@ export default function Header() {
         />
         {/* Mobile Menu */}
         <div
-          className={`max-h-100vh fixed top-0 right-0 bottom-0 w-80 transform overflow-y-auto bg-[var(--background)] transition-transform duration-300 ease-in-out ${
+          className={`max-h-100vh fixed top-0 right-0 bottom-0 w-80 transform overflow-y-auto bg-[var(--background)]/60 backdrop-blur-lg transition-transform duration-300 ease-in-out ${
             open ? 'translate-y-0' : '-translate-y-full'
           }`}
         >
