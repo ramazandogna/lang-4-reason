@@ -1,6 +1,10 @@
-import { cn } from '@/lib/utils/cn'; // Varsa yoksa className birleştirici. Yoksa string ile birleştir.
-import { BUTTON_SIZE, BUTTON_COLOR } from './Button-constants';
-import { ButtonProps } from './Button-types';
+import { cn } from '@/lib/utils/cn';
+import {
+  BUTTON_SIZE,
+  BUTTON_COLOR,
+  BUTTON_ICON_SIZE
+} from './Button.constants';
+import { ButtonProps } from './Button.types';
 
 export default function Button({
   size = 'md',
@@ -10,17 +14,30 @@ export default function Button({
   leftIcon,
   rightIcon,
   children,
+  iconOnly = false,
   className = '',
+  align = 'center', // 'left' | 'center' | 'right'
   ...props
-}: ButtonProps) {
+}: ButtonProps & { align?: 'left' | 'center' | 'right' }) {
   const disabled = state === 'disabled' || props.disabled;
+
+  // Icon button ise özel classları uygula
+  const isIconOnly = iconOnly || (!children && (leftIcon || rightIcon));
+
+  // Justify değerini tailwind'e çevir
+  const justify =
+    align === 'left'
+      ? 'justify-start'
+      : align === 'right'
+        ? 'justify-end'
+        : 'justify-center';
 
   return (
     <button
       type="button"
       className={cn(
-        'inline-flex cursor-pointer items-center font-semibold transition-all duration-150 outline-none select-none',
-        BUTTON_SIZE[size],
+        'inline-flex items-center font-bold', // button always flex
+        isIconOnly ? BUTTON_ICON_SIZE[size] : BUTTON_SIZE[size],
         BUTTON_COLOR[color][variant],
         disabled && 'pointer-events-none cursor-not-allowed opacity-60',
         className
@@ -28,9 +45,15 @@ export default function Button({
       disabled={disabled}
       {...props}
     >
-      {leftIcon && <span className="mr-2 flex items-center">{leftIcon}</span>}
-      <span>{children}</span>
-      {rightIcon && <span className="ml-2 flex items-center">{rightIcon}</span>}
+      {/* İÇERİK WRAPPER - gap-2 ile sabit boşluk, justify ile hizalama */}
+      <span className={cn('flex w-full items-center', justify, 'gap-2')}>
+        {/* Sol ikon varsa */}
+        {leftIcon && <span className="flex items-center">{leftIcon}</span>}
+        {/* Sadece ikon değilse children'ı göster */}
+        {!isIconOnly && <span>{children}</span>}
+        {/* Sağ ikon varsa */}
+        {rightIcon && <span className="flex items-center">{rightIcon}</span>}
+      </span>
     </button>
   );
 }

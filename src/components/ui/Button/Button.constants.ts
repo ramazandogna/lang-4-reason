@@ -1,4 +1,4 @@
-import { ButtonSize, ButtonColor, ButtonVariant } from './Button-types';
+import { ButtonSize, ButtonColor, ButtonVariant } from './Button.types';
 
 // Tailwind classlarını sabitlerde tanımla
 export const BUTTON_SIZE: Record<ButtonSize, string> = {
@@ -6,6 +6,13 @@ export const BUTTON_SIZE: Record<ButtonSize, string> = {
   md: 'px-4 py-[10px] text-base rounded-[20px] gap-2 h-10',
   lg: 'px-6 py-3 text-lg rounded-[24px] gap-3 h-12',
   xl: 'px-8 py-4 text-xl rounded-[28px] gap-3 h-14'
+};
+
+export const BUTTON_ICON_SIZE: Record<ButtonSize, string> = {
+  sm: 'w-8 h-8 rounded-full p-0 justify-center',
+  md: 'w-10 h-10 rounded-full p-0 justify-center',
+  lg: 'w-12 h-12 rounded-full p-0 justify-center',
+  xl: 'w-14 h-14 rounded-full p-0 justify-center'
 };
 
 export const BUTTON_COLOR: Record<
