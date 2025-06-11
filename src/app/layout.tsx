@@ -3,8 +3,9 @@ import type { Metadata } from 'next';
 import { Plus_Jakarta_Sans } from 'next/font/google';
 import { getInitialTheme } from '@/lib/get-initial-theme';
 import { ThemeProvider } from './theme-provider';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import { Header } from '@/components/Header';
+import { Footer } from '@/components/Footer';
+import { ResponsiveProvider } from '@/context/ResponsiveContext';
 
 const plusJakarta = Plus_Jakarta_Sans({
   variable: '--font-plus-jakarta',
@@ -29,11 +30,13 @@ export default async function RootLayout({
     <html lang="en" data-theme={theme} className={plusJakarta.variable}>
       <body className="flex min-h-screen flex-col justify-center bg-[var(--background)] text-[var(--text)] transition-colors duration-300">
         <ThemeProvider defaultTheme={theme}>
-          <Header />
-          <main className="container mx-auto w-full flex-1 py-6">
-            {children}
-          </main>
-          <Footer />
+          <ResponsiveProvider>
+            <Header />
+            <main className="container mx-auto w-full flex-1 pt-20! pb-6">
+              {children}
+            </main>
+            <Footer />
+          </ResponsiveProvider>
         </ThemeProvider>
       </body>
     </html>
