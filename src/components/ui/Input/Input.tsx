@@ -3,7 +3,6 @@
 import { cn } from '@/lib/utils/cn';
 import { INPUT_BASE, INPUT_VARIANTS, INPUT_HELPER } from './Input.constants';
 import type { InputProps } from './Input.types';
-import { FocusEvent } from 'react';
 
 export default function Input({
   label,
@@ -13,8 +12,6 @@ export default function Input({
   rightIcon,
   action,
   className = '',
-  onFocus,
-  onBlur,
   ...props
 }: InputProps) {
   return (

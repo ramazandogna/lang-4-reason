@@ -10,11 +10,10 @@ export default function PostsHeader() {
   const [activeKey, setActiveKey] = useState('all');
 
   return (
-    <div className="flex flex-wrap items-center justify-between gap-6 max-md:flex-col">
-      {/* ---------- T A B   B A R ---------- */}
-      <div className="w-full overflow-x-auto overflow-y-hidden">
-        {/* min-w-max ile navbar’ın kendi genişliğini korur, flex-nowrap ile satır kaydırmaz */}
-        <div className="inline-block min-w-max">
+    <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
+      {/* ---------- TAB BAR ---------- */}
+      <div className="flex w-full justify-start overflow-x-auto overflow-y-hidden">
+        <div className="inline-flex min-w-max">
           <Navbar
             items={NAV_ITEMS}
             activeKey={activeKey}
@@ -24,12 +23,12 @@ export default function PostsHeader() {
         </div>
       </div>
 
-      {/* --------- A R A M A   I N P U T --------- */}
-      <div className="w-full md:w-auto">
+      {/* --------- SEARCH INPUT --------- */}
+      <div className="flex w-full! justify-center md:max-w-[320px] md:justify-end">
         <Input
           placeholder="Search blog..."
           rightIcon={<Search />}
-          className="w-full max-w-[320px]"
+          className="w-full"
         />
       </div>
     </div>
