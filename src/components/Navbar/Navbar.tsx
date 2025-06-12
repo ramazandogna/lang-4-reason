@@ -11,7 +11,7 @@ export default function Navbar({
   return (
     <nav
       className={cn(
-        'flex gap-4 border-b border-gray-200 bg-transparent',
+        'flex items-center gap-4 border-b border-gray-200 bg-transparent',
         className
       )}
     >
@@ -40,7 +40,7 @@ export default function Navbar({
             {/* Alttaki çizgi */}
             <span
               className={cn(
-                'absolute -bottom-[2px] left-0 h-[2px] w-full rounded-full transition-all duration-200',
+                'absolute -bottom-[5px] left-0 h-[2px] w-full rounded-full transition-all duration-200',
                 isActive
                   ? 'h-[3px] bg-[#5942f9]'
                   : 'bg-gray-200 group-hover:bg-gray-900'
