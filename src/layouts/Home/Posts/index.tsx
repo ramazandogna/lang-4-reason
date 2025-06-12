@@ -5,7 +5,7 @@ import PostsPagination from './PostsPagination/PostsPagination';
 
 function Posts() {
   return (
-    <span className="flex flex-col gap-[64px] pt-4">
+    <span className="flex flex-col gap-[64px] pt-4 max-md:gap-[40px]">
       <PostsHeader />
       <PostsCards />
       <PostsPagination />
