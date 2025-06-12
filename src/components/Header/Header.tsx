@@ -42,7 +42,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-0 right-0 left-0 z-50 flex h-20 w-full items-center justify-center bg-[var(--background)]/60 backdrop-blur-lg max-md:h-18">
+      <header className="fixed top-0 right-0 left-0 z-50 flex h-20 w-full items-center justify-center border-b border-[var(--text)]/10 bg-[var(--background)]/60 backdrop-blur-lg max-md:h-18">
         <div className="container mx-auto flex w-full items-center justify-between">
           <div className="flex gap-12">
             <Link href="/">

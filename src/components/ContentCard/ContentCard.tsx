@@ -33,10 +33,11 @@ function ContentCard({
           sizes="(max-width: 600px) 100vw, 420px"
           priority
         />
-        <Link href="/" className="absolute inset-0">
-          <Button className="absolute right-4 bottom-4 z-10 flex h-10 w-10 items-center justify-center rounded-full border-2 border-white/80 bg-black/60 backdrop-blur-sm transition hover:scale-105">
-            <ArrowUpRight className="text-white" size={20} />
-          </Button>
+        <Link href="/" className="inset-0 cursor-pointer">
+          <Button
+            rightIcon={<ArrowUpRight className="text-white" size={20} />}
+            className="absolute right-4 bottom-4 z-10 flex h-10 w-10 items-center justify-center rounded-full border-2 border-white/80 bg-black/60 backdrop-blur-sm transition hover:scale-105"
+          ></Button>
         </Link>
       </div>
       <div className="flex flex-col gap-2 p-6 pb-4">

@@ -36,7 +36,7 @@ export default function Button({
     <button
       type="button"
       className={cn(
-        'inline-flex items-center font-bold', // button always flex
+        'inline-flex cursor-pointer items-center font-bold', // button always flex
         isIconOnly ? BUTTON_ICON_SIZE[size] : BUTTON_SIZE[size],
         BUTTON_COLOR[color][variant],
         disabled && 'pointer-events-none cursor-not-allowed opacity-60',

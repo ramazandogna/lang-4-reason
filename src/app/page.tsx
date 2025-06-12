@@ -5,7 +5,7 @@ import Posts from '@/layouts/Home/Posts';
 export default function TypographyShowcase() {
   return (
     <>
-      <Section>
+      <Section className="pt-16! max-md:pt-8!">
         <LatestPosts />
       </Section>
       <Section>
