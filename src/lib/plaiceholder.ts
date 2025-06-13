@@ -1,7 +1,24 @@
+// lib/plaiceholder.ts
 import { getPlaiceholder } from 'plaiceholder';
 
+// Eğer Buffer yoksa import et
+import { Buffer } from 'buffer';
+
 export async function getBlurDataURL(src: string) {
-  const bufferSrc = Buffer.from(src); // Convert string to Buffer
-  const { base64 } = await getPlaiceholder(bufferSrc);
+  let input: Buffer;
+
+  if (src.startsWith('http')) {
+    // remote URL ise fetch edip Buffer yap
+    const res = await fetch(src);
+    if (!res.ok) throw new Error(`Resim yüklenemedi: ${res.status}`);
+    const arrayBuffer = await res.arrayBuffer();
+    input = Buffer.from(arrayBuffer);
+  } else {
+    // yerel path ise doğrudan Buffer yap
+    input = Buffer.from(src);
+  }
+
+  // getPlaiceholder hem Buffer hem de string path alabiliyor
+  const { base64 } = await getPlaiceholder(input);
   return base64;
 }
