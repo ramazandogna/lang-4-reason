@@ -22,6 +22,9 @@ function ContentCard({
   author = 'Azunyan U. Wu',
   readTime = '5min read'
 }: ContentCardProps) {
+  const postBlurDataUrl = postImage.blurDataURL;
+  const avatarBlurDataUrl = avatar.blurDataURL;
+
   return (
     <div className="flex flex-col overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm transition hover:shadow-lg">
       <div className="relative h-[220px] w-full overflow-hidden rounded-3xl">
@@ -31,7 +34,9 @@ function ContentCard({
           fill
           className="object-cover"
           sizes="(max-width: 600px) 100vw, 420px"
-          priority
+          placeholder="blur"
+          blurDataURL={postBlurDataUrl}
+          loading="lazy"
         />
         <Link href="/" className="inset-0 cursor-pointer">
           <Button
@@ -59,6 +64,9 @@ function ContentCard({
               alt="Yazar"
               width={40}
               height={40}
+              placeholder="blur"
+              blurDataURL={avatarBlurDataUrl}
+              loading="lazy"
               className="rounded-full border-2 border-white shadow-md"
             />
             <span className="text-sm font-bold text-gray-900">{author}</span>
