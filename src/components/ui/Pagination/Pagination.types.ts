@@ -1,14 +1,19 @@
 export interface PaginationProps {
-  /** Geçerli sayfa (1-based) */
   currentPage: number;
-  /** Toplam sayfa sayısı */
   totalPages: number;
-  /** Sayfa değiştiğinde çağrılır */
-  onPageChange?: (page: number) => void;
-  /** Her sayfada gösterilen öğe sayısı */
   pageSize: number;
-  /** Toplam öğe sayısı */
   totalResults: number;
+  onPageChange?: (page: number) => void;
+
+  /** 'start' | 'center' */
+  align?: 'start' | 'center';
+  /** Önceki/Sonraki yazısını göster; false ise sadece ikon görünür */
+  showPrevNextText?: boolean;
+  /** Sayfa numaralarını göster; false ise sayılar + "..." gizlenir */
+  showPages?: boolean;
+  /** “Showing…” metnini göster */
+  showResults?: boolean;
+
   className?: string;
 }
 

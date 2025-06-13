@@ -2,19 +2,60 @@
 'use client';
 
 import { cn } from '@/lib/utils/cn';
-import { PAGINATION_LABELS } from './Pagination.constants';
+import { PAGINATION_LABELS, PAGINATION_DEFAULTS } from './Pagination.constants';
 import type { PaginationProps, PageItem } from './Pagination.types';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
+import { useResponsive } from '@/context/ResponsiveContext';
 
 export default function Pagination({
   currentPage,
   totalPages,
-  onPageChange,
   pageSize,
   totalResults,
+  onPageChange,
+
+  /** Masaüstü için geçerli */
+  align = PAGINATION_DEFAULTS.align,
+  showPrevNextText = PAGINATION_DEFAULTS.showPrevNextText,
+  showPages = PAGINATION_DEFAULTS.showPages,
+  showResults = PAGINATION_DEFAULTS.showResults,
+
   className = ''
 }: PaginationProps) {
+  const { width } = useResponsive();
+
+  // --- MOBİL LAYOUT ---
+  if (width < 640) {
+    return (
+      <div className="flex w-full items-center justify-center gap-4 py-2">
+        <Button
+          size="sm"
+          variant="ghost"
+          color="gray"
+          leftIcon={<ChevronLeft size={20} />}
+          onClick={() => onPageChange?.(Math.max(1, currentPage - 1))}
+          disabled={currentPage === 1}
+          iconOnly
+        />
+        <span className="text-md font-semibold">
+          Sayfa {currentPage} of {totalPages}
+        </span>
+        <Button
+          size="sm"
+          variant="ghost"
+          color="gray"
+          rightIcon={<ChevronRight size={20} />}
+          onClick={() => onPageChange?.(Math.min(totalPages, currentPage + 1))}
+          disabled={currentPage === totalPages}
+          iconOnly
+        />
+      </div>
+    );
+  }
+
+  // --- MASAÜSTÜ LAYOUT ---
+  // sayfa dizisi oluştur
   const pages: PageItem[] = [];
   for (let i = 1; i <= totalPages; i++) {
     if (i <= 4 || i === currentPage || i > totalPages - 2) {
@@ -25,9 +66,17 @@ export default function Pagination({
   }
 
   const endItem = Math.min(currentPage * pageSize, totalResults);
+  const justifyClass = align === 'start' ? 'justify-start' : 'justify-center';
 
   return (
-    <div className={cn('flex items-center gap-4 text-gray-600', className)}>
+    <div
+      className={cn(
+        'flex w-full items-center gap-4 text-gray-600',
+        'group', // group-hover için
+        justifyClass,
+        className
+      )}
+    >
       {/* Önceki */}
       <Button
         size="sm"
@@ -36,35 +85,39 @@ export default function Pagination({
         leftIcon={<ChevronLeft size={16} />}
         onClick={() => onPageChange?.(Math.max(1, currentPage - 1))}
         disabled={currentPage === 1}
-        className="text-sm font-semibold transition-all duration-300 hover:text-[rgba(89,66,249,0.50)]! disabled:opacity-50"
+        className="text-sm font-semibold transition-all duration-300 hover:text-[rgba(89,66,249,0.50)] disabled:opacity-50"
       >
-        {PAGINATION_LABELS.prev}
+        {showPrevNextText ? PAGINATION_LABELS.prev : null}
       </Button>
 
       {/* Sayfa numaraları */}
-      {pages.map((p, idx) =>
-        p === 'ellipsis' ? (
-          <span key={`e-${idx}`} className="text-md px-2">
-            …
-          </span>
-        ) : (
-          <Button
-            key={p}
-            size="md"
-            variant="ghost"
-            color="gray"
-            onClick={() => onPageChange?.(p as number)}
-            className={cn(
-              'h-8! w-8! p-0 transition-all duration-300',
-              p === currentPage
-                ? 'bg-[rgba(89,66,249,0.08)]! font-semibold text-[#5942f9] hover:bg-[rgba(89,66,249,0.20)]!'
-                : 'hover:bg-gray-300 hover:text-white'
-            )}
-          >
-            {p}
-          </Button>
-        )
-      )}
+      {showPages &&
+        pages.map((p, idx) =>
+          p === 'ellipsis' ? (
+            <span
+              key={`e-${idx}`}
+              className="text-md px-2 transition-all duration-300"
+            >
+              …
+            </span>
+          ) : (
+            <Button
+              key={p}
+              size="md"
+              variant="ghost"
+              color="gray"
+              onClick={() => onPageChange?.(p as number)}
+              className={cn(
+                'h-8! w-8! p-0 transition-all duration-300',
+                p === currentPage
+                  ? 'bg-[rgba(89,66,249,0.08)]! font-semibold text-[#5942f9] hover:bg-[rgba(89,66,249,0.20)]!'
+                  : 'hover:bg-[rgba(89,66,249,0.10)]! hover:text-[rgba(89,66,249,0.50)]!'
+              )}
+            >
+              {p}
+            </Button>
+          )
+        )}
 
       {/* Sonraki */}
       <Button
@@ -76,22 +129,22 @@ export default function Pagination({
         disabled={currentPage === totalPages}
         className="text-sm font-semibold transition-all duration-300 hover:text-[rgba(89,66,249,0.50)]! disabled:opacity-50"
       >
-        {PAGINATION_LABELS.next}
+        {showPrevNextText ? PAGINATION_LABELS.next : null}
       </Button>
 
       {/* Showing metni */}
-      <span className="group ml-auto text-sm font-semibold">
-        Showing{' '}
-        <span className="group-hover:text-[rgba(89,66,249,0.80)]! group-hover:transition-all group-hover:duration-300">
-          {' '}
-          {endItem}{' '}
-        </span>{' '}
-        of{' '}
-        <span className="group-hover:text-[rgba(89,66,249,0.50)]! group-hover:transition-all group-hover:duration-300">
-          {totalResults.toLocaleString()}{' '}
+      {showResults && (
+        <span className="ml-auto text-sm font-semibold">
+          <span className="transition-all duration-300 group-hover:text-[rgba(89,66,249,0.50)]!">
+            {totalResults.toLocaleString()}
+          </span>{' '}
+          sonuçtan{' '}
+          <span className="transition-all duration-300 group-hover:text-[rgba(89,66,249,0.80)]!">
+            {endItem}
+          </span>{' '}
+          tanesi
         </span>
-        results
-      </span>
+      )}
     </div>
   );
 }
