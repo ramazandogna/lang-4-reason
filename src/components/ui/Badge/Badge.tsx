@@ -1,6 +1,6 @@
 import { BADGE_COLOR, BADGE_SIZE, BADGE_SHAPE } from './Badge.constants';
 import { BadgeProps } from './Badge.types';
-import { cn } from '@/lib/utils/cn'; // Kendi util'in
+import { cn } from '@/lib/cn'; // Kendi util'in
 
 export default function Badge({
   color = 'gray',

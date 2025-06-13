@@ -12,7 +12,7 @@ export default function TypographyShowcase() {
       <Section className="container mx-auto w-full pt-0!">
         <Posts />
       </Section>
-      <Section className="mx-auto w-full bg-[var(--secondary-bg)]/30 p-16!">
+      <Section className="mx-auto w-full bg-[var(--secondary-bg)]/30 py-16!">
         <span className="container">
           <Newsletter />
         </span>

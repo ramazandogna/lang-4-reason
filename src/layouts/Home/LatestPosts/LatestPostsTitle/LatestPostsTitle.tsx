@@ -9,7 +9,7 @@ function LatestPostsTitle() {
       <span className="flex items-center max-md:flex-col max-md:items-center md:justify-between">
         <span className="flex max-w-[696px] flex-col gap-[20px]">
           <span>
-            <Badge color="info" shape="pill" variant="soft" size="sm">
+            <Badge color="theme" shape="pill" variant="soft" size="sm">
               Blog Yazıları
             </Badge>
           </span>

@@ -1,7 +1,7 @@
 // src/components/ui/Pagination/Pagination.tsx
 'use client';
 
-import { cn } from '@/lib/utils/cn';
+import { cn } from '@/lib/cn';
 import { PAGINATION_LABELS, PAGINATION_DEFAULTS } from './Pagination.constants';
 import type { PaginationProps, PageItem } from './Pagination.types';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
@@ -31,24 +31,33 @@ export default function Pagination({
       <div className="flex w-full items-center justify-center gap-4 py-2">
         <Button
           size="sm"
-          variant="ghost"
-          color="gray"
+          variant="primary"
+          color="theme"
           leftIcon={<ChevronLeft size={20} />}
           onClick={() => onPageChange?.(Math.max(1, currentPage - 1))}
           disabled={currentPage === 1}
           iconOnly
+          className="text-sm font-semibold transition-all duration-300 hover:text-[var(--accent)] disabled:opacity-50"
         />
-        <span className="text-md font-semibold">
-          Sayfa {currentPage} of {totalPages}
+        <span className="text-md group font-semibold">
+          Sayfa{' '}
+          <span className="transition-all duration-300 group-hover:text-[var(--accent)]!">
+            {currentPage}{' '}
+          </span>
+          of{' '}
+          <span className="transition-all duration-300 group-hover:text-[var(--accent)]!">
+            {totalPages}
+          </span>
         </span>
         <Button
           size="sm"
-          variant="ghost"
-          color="gray"
+          variant="primary"
+          color="theme"
           rightIcon={<ChevronRight size={20} />}
           onClick={() => onPageChange?.(Math.min(totalPages, currentPage + 1))}
           disabled={currentPage === totalPages}
           iconOnly
+          className="text-sm font-semibold transition-all duration-300 hover:text-[var(--accent)] disabled:opacity-50"
         />
       </div>
     );
