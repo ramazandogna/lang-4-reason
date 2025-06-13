@@ -11,7 +11,7 @@ export default function Navbar({
   return (
     <nav
       className={cn(
-        'flex items-center gap-4 border-b border-gray-200 bg-transparent',
+        'flex items-center gap-4 border-b border-[var(--text)]/30 bg-transparent',
         className
       )}
     >
@@ -26,14 +26,14 @@ export default function Navbar({
             className={cn(
               'relative flex items-center gap-2 px-4 py-2 font-bold transition-all hover:bg-transparent focus:outline-none',
               isActive
-                ? 'text-gray-900'
-                : 'group text-gray-500 hover:text-gray-900'
+                ? 'text-[var(--primary)]'
+                : 'group text-[var(--text)]/50 hover:text-[var(--text)]'
             )}
           >
-            <span>{item.label}</span>
+            <span className="text-[var(--accent)]">{item.label}</span>
             {/* Sadece seçili tabda badge görünür */}
             {isActive && item.count !== undefined && (
-              <span className="ml-2 rounded-full bg-[rgba(89,66,249,0.08)] px-3 py-0.5 text-base font-bold text-[#5942f9]">
+              <span className="ml-2 rounded-full bg-[var(--accent)]/10 px-3 py-0.5 text-base font-bold text-[var(--text)]">
                 {item.count}
               </span>
             )}
@@ -42,8 +42,8 @@ export default function Navbar({
               className={cn(
                 'absolute -bottom-[1.5px] left-0 z-[10] h-[1.5px] w-full rounded-full transition-all duration-200',
                 isActive
-                  ? 'h-[3px] bg-[#5942f9]'
-                  : 'bg-gray-200 group-hover:bg-gray-900'
+                  ? 'h-[3px] bg-[var(--accent)]'
+                  : 'bg-[var(--text)]/10 group-hover:bg-[var(--text)]'
               )}
             />
           </Button>

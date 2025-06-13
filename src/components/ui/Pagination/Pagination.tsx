@@ -80,12 +80,12 @@ export default function Pagination({
       {/* Önceki */}
       <Button
         size="sm"
-        variant="ghost"
-        color="gray"
+        variant="primary"
+        color="theme"
         leftIcon={<ChevronLeft size={16} />}
         onClick={() => onPageChange?.(Math.max(1, currentPage - 1))}
         disabled={currentPage === 1}
-        className="text-sm font-semibold transition-all duration-300 hover:text-[rgba(89,66,249,0.50)] disabled:opacity-50"
+        className="text-sm font-semibold transition-all duration-300 hover:text-[var(--accent)] disabled:opacity-50"
       >
         {showPrevNextText ? PAGINATION_LABELS.prev : null}
       </Button>
@@ -105,13 +105,13 @@ export default function Pagination({
               key={p}
               size="md"
               variant="ghost"
-              color="gray"
+              color="theme"
               onClick={() => onPageChange?.(p as number)}
               className={cn(
                 'h-8! w-8! p-0 transition-all duration-300',
                 p === currentPage
-                  ? 'bg-[rgba(89,66,249,0.08)]! font-semibold text-[#5942f9] hover:bg-[rgba(89,66,249,0.20)]!'
-                  : 'hover:bg-[rgba(89,66,249,0.10)]! hover:text-[rgba(89,66,249,0.50)]!'
+                  ? 'bg-[var(--text)]! font-semibold hover:bg-[var(--secondary-bg)]!'
+                  : 'text-[var(--accent)]! hover:bg-[var(--text)]! hover:text-[var(--background)]!'
               )}
             >
               {p}
@@ -122,24 +122,29 @@ export default function Pagination({
       {/* Sonraki */}
       <Button
         size="sm"
-        variant="ghost"
-        color="gray"
+        variant="primary"
+        color="theme"
         rightIcon={<ChevronRight size={16} />}
         onClick={() => onPageChange?.(Math.min(totalPages, currentPage + 1))}
         disabled={currentPage === totalPages}
-        className="text-sm font-semibold transition-all duration-300 hover:text-[rgba(89,66,249,0.50)]! disabled:opacity-50"
+        className="text-sm font-semibold transition-all duration-300 hover:text-[var(--accent)]! disabled:opacity-50"
       >
         {showPrevNextText ? PAGINATION_LABELS.next : null}
       </Button>
 
       {/* Showing metni */}
       {showResults && (
-        <span className="ml-auto text-sm font-semibold">
-          <span className="transition-all duration-300 group-hover:text-[rgba(89,66,249,0.50)]!">
+        <span
+          className={cn(
+            'text-sm font-semibold text-[var(--text)]/50 transition-all duration-300',
+            align === 'start' && 'ml-auto'
+          )}
+        >
+          <span className="transition-all duration-300 group-hover:text-[var(--accent)]!">
             {totalResults.toLocaleString()}
           </span>{' '}
           sonuçtan{' '}
-          <span className="transition-all duration-300 group-hover:text-[rgba(89,66,249,0.80)]!">
+          <span className="transition-all duration-300 group-hover:text-[var(--accent)]!">
             {endItem}
           </span>{' '}
           tanesi

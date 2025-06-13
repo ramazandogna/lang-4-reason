@@ -15,7 +15,7 @@ export default function Input({
   ...props
 }: InputProps) {
   return (
-    <div className={cn('flex flex-col gap-1', className)}>
+    <div className={cn('flex w-[320px] flex-col gap-1', className)}>
       {label && (
         <label className="text-sm font-semibold text-gray-900">{label}</label>
       )}

@@ -5,15 +5,15 @@ export const INPUT_BASE =
 
 export const INPUT_VARIANTS: Record<InputVariant, string> = {
   default:
-    'border border-gray-30 focus-within:border-[var(--accent)] focus-within:ring-1 focus-within:ring-[var(--accent)]',
+    'border border-[var(--accent)]/40! focus-within:border-[var(--accent)]! focus-within:ring-1 focus-within:ring-[var(--accent)]!',
   error:
-    'border border-destructive-50 focus-within:border-destructive-50 focus-within:ring-1 focus-within:ring-destructive-50',
+    'border border-[var(--error)]! focus-within:border-[var(--error)]! focus-within:ring-1 focus-within:ring-[var(--error)]!',
   success:
-    'border border-green-500 focus-within:border-green-500 focus-within:ring-1 focus-within:ring-green-500'
+    'border border-[var(--success)]! focus-within:border-[var(--success)]! focus-within:ring-1 focus-within:ring-[var(--success)]!'
 };
 
 export const INPUT_HELPER: Record<InputVariant, string> = {
-  default: 'text-gray-500',
-  error: 'text-destructive-50',
-  success: 'text-green-500'
+  default: 'text-[var(--text-secondary)]!',
+  error: 'text-[var(--error)]!',
+  success: 'text-[var(--success)]!'
 };
