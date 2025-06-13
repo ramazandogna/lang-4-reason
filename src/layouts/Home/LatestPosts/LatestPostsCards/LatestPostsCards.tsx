@@ -1,4 +1,4 @@
-import { ContentCard } from '@/components/ContentCard';
+import { ContentCard } from '@/components/ui/ContentCard';
 import { avatarImages } from '@/images/avatar-images';
 import { postImages } from '@/images/post-images';
 import React from 'react';

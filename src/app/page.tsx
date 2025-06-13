@@ -1,4 +1,4 @@
-import { Section } from '@/components/Section';
+import { Section } from '@/components/ui/Section';
 import LatestPosts from '@/layouts/Home/LatestPosts';
 import Posts from '@/layouts/Home/Posts';
 
