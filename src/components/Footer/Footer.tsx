@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from '@/components/ui/Link';
 import { Button } from '../ui/Button';
 import { Input } from '../ui/Input';
 import { Section } from '../ui/Section';
@@ -41,7 +41,9 @@ function Footer() {
           <div className="text-[var(--text)]/60 transition-all duration-300">
             Copyright 2025©{' '}
             <Link
-              className="font-bold transition-all duration-300 group-hover:font-extrabold group-hover:text-[var(--accent)] group-hover:underline"
+              variant="after"
+              newTab
+              className="font-bold transition-all duration-300 group-hover:font-extrabold group-hover:text-[var(--accent)]"
               href="https://github.com/ramazandogna"
             >
               Ramazan Doğan

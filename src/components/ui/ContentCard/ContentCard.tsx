@@ -1,7 +1,7 @@
 import Image, { StaticImageData } from 'next/image';
 import { ArrowUpRight } from 'lucide-react';
 import { Button } from '../Button';
-import Link from 'next/link';
+import Link from '@/components/ui/Link';
 
 type ContentCardProps = {
   postImage: StaticImageData;
@@ -38,10 +38,15 @@ function ContentCard({
           blurDataURL={postBlurDataUrl}
           loading="lazy"
         />
-        <Link href="/" className="inset-0 cursor-pointer">
+        <Link href="/" className="group inset-0 cursor-pointer">
           <Button
-            rightIcon={<ArrowUpRight className="text-white" size={20} />}
-            className="absolute right-4 bottom-4 z-10 flex h-10 w-10 items-center justify-center rounded-full border-2 border-white/80 bg-black/60 backdrop-blur-sm transition hover:scale-105"
+            rightIcon={
+              <ArrowUpRight
+                className="text-white transition-all duration-300 group-hover:scale-105 group-hover:rotate-45"
+                size={20}
+              />
+            }
+            className="absolute right-4 bottom-4 z-10 flex h-10 w-10 items-center justify-center rounded-full border-2 border-white/60 bg-transparent backdrop-blur-sm transition group-hover:border-white/80 hover:scale-105 hover:bg-transparent"
           ></Button>
         </Link>
       </div>

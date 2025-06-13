@@ -1,0 +1,37 @@
+/* after-link hover animasyonu */
+.afterlink::after {
+  content: '';
+  position: absolute;
+  top: 77%;
+  left: -0.15em;
+  right: -0.15em;
+  bottom: 0;
+  transition: top 300ms cubic-bezier(0, 0.8, 0.13, 1);
+  background-color: var(--accent);
+  opacity: 0.3;
+  border-radius: 1px;
+}
+.afterlink:hover::after {
+  top: 0;
+}
+
+/* menü altı çizgi animasyonu */
+.menulink::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--accent);
+  opacity: 0.3;
+  transition: width 300ms cubic-bezier(0.32, 0.74, 0.57, 1);
+}
+.menulink:hover::after {
+  width: 100%;
+}
+
+/* underline variant */
+.underlinelink:hover {
+  text-decoration: underline;
+}

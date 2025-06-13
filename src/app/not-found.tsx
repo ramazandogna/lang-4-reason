@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from '@/components/ui/Link';
 
 export default function NotFound() {
   return (
@@ -7,7 +7,7 @@ export default function NotFound() {
       <p className="text-xl">Üzgünüz, aradığınız sayfa bulunamadı.</p>
       <Link
         href="/"
-        className="mt-4 inline-block rounded-md bg-[var(--accent)] px-6 py-3 text-[var(--background)] transition-opacity hover:opacity-80"
+        className="mt-4 inline-block rounded-md px-6 py-3 text-[var(--background)] transition-opacity hover:opacity-80"
       >
         Ana sayfaya dön
       </Link>

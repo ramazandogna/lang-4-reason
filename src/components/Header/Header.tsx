@@ -1,6 +1,6 @@
 'use client';
 import { SunMoon } from 'lucide-react';
-import Link from 'next/link';
+import Link from '@/components/ui/Link';
 import { usePathname } from 'next/navigation';
 import { useTheme } from '@/app/theme-provider';
 import HamburgerIcon from '../ui/HamburgerIcon';
@@ -50,7 +50,7 @@ export default function Header() {
             </Link>
             <ul className="text-md flex items-center justify-center gap-8 font-bold max-md:hidden">
               {navItems.slice(1).map((item) => (
-                <Link key={item.path} href={item.path}>
+                <Link variant="menu" key={item.path} href={item.path}>
                   <li className="my-auto">{item.name}</li>
                 </Link>
               ))}
