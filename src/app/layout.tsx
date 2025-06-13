@@ -32,9 +32,7 @@ export default async function RootLayout({
         <ThemeProvider defaultTheme={theme}>
           <ResponsiveProvider>
             <Header />
-            <main className="container mx-auto w-full flex-1 pt-20! pb-6">
-              {children}
-            </main>
+            <main className="pt-20! pb-6">{children}</main>
             <Footer />
           </ResponsiveProvider>
         </ThemeProvider>

@@ -2,11 +2,12 @@
 
 /* Varsayılan renk tanımı */
 :root {
-  --main-color: #171717;
   --primary-dark: #352f44;
   --secondary-dark: #5c5470;
   --primary-light: #b9b4c7;
   --secondary-light: #faf0e6;
+  --error: #ff4d4f;
+  --success: #52c41a;
   --font-sans: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
 }
 
