@@ -1,4 +1,4 @@
-import { Button } from '../ui/Button';
+import { Button } from '../Button';
 import { NavbarProps } from './Navbar.types';
 import { cn } from '@/lib/utils/cn';
 
@@ -40,7 +40,7 @@ export default function Navbar({
             {/* Alttaki çizgi */}
             <span
               className={cn(
-                'absolute -bottom-[5px] left-0 h-[2px] w-full rounded-full transition-all duration-200',
+                'absolute -bottom-[1.5px] left-0 z-[10] h-[1.5px] w-full rounded-full transition-all duration-200',
                 isActive
                   ? 'h-[3px] bg-[#5942f9]'
                   : 'bg-gray-200 group-hover:bg-gray-900'
