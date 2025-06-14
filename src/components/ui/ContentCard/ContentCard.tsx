@@ -1,17 +1,8 @@
-import Image, { StaticImageData } from 'next/image';
+import Image from 'next/image';
 import { ArrowUpRight } from 'lucide-react';
 import { Button } from '../Button';
 import Link from '@/components/ui/Link';
-
-type ContentCardProps = {
-  postImage: StaticImageData;
-  avatar: StaticImageData;
-  category?: string;
-  title?: string;
-  desc?: string;
-  author?: string;
-  readTime?: string;
-};
+import { ContentCardProps } from './ContantCard.types';
 
 function ContentCard({
   postImage,
@@ -22,19 +13,28 @@ function ContentCard({
   author = 'Azunyan U. Wu',
   readTime = '5min read'
 }: ContentCardProps) {
-  const postBlurDataUrl = postImage.blurDataURL;
+  const isStaticImage =
+    typeof postImage !== 'string' && 'blurDataURL' in postImage;
+  const postImageSrc =
+    typeof postImage === 'string'
+      ? postImage
+      : 'src' in postImage
+        ? postImage.src
+        : postImage;
+  const postBlurDataUrl = isStaticImage ? postImage.blurDataURL : undefined;
+
   const avatarBlurDataUrl = avatar.blurDataURL;
 
   return (
     <div className="flex flex-col overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm transition hover:shadow-lg">
       <div className="relative h-[220px] w-full overflow-hidden rounded-3xl">
         <Image
-          src={postImage}
+          src={postImageSrc}
           alt="Post Görsel"
           fill
           className="object-cover"
           sizes="(max-width: 600px) 100vw, 420px"
-          placeholder="blur"
+          placeholder={postBlurDataUrl ? 'blur' : 'empty'}
           blurDataURL={postBlurDataUrl}
           loading="lazy"
         />
@@ -47,7 +47,7 @@ function ContentCard({
               />
             }
             className="absolute right-4 bottom-4 z-10 flex h-10 w-10 items-center justify-center rounded-full border-2 border-white/60 bg-transparent backdrop-blur-sm transition group-hover:border-white/80 hover:scale-105 hover:bg-transparent"
-          ></Button>
+          />
         </Link>
       </div>
       <div className="flex flex-col gap-2 p-6 pb-4">

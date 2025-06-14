@@ -105,6 +105,15 @@ body {
   padding: 0 16px;
 }
 
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
 /* ---- TAILWIND THEME ---- */
 @theme {
   --heading-xl: 48px;

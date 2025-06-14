@@ -1,48 +1,33 @@
-// src/components/PostsPagination.tsx
 'use client';
 
-import { useState } from 'react';
 import { Pagination } from '@/components/ui/Pagination';
 
-type PaginationConfig = {
+type Props = {
   currentPage: number;
   totalPages: number;
   pageSize: number;
   totalResults: number;
-  /** Masaüstü için geçerli olan ayarlar */
-  align: 'start' | 'center';
-  showPrevNextText: boolean;
-  showPages: boolean;
-  showResults: boolean;
+  onPageChange: (page: number) => void;
 };
 
-export default function PostsPagination() {
-  const [config, setConfig] = useState<PaginationConfig>({
-    currentPage: 1,
-    totalPages: 10,
-    pageSize: 12,
-    totalResults: 120,
-    align: 'center',
-    showPrevNextText: true,
-    showPages: true,
-    showResults: true
-  });
-
-  const handlePageChange = (newPage: number) => {
-    setConfig((prev) => ({ ...prev, currentPage: newPage }));
-  };
-
+export default function PostsPagination({
+  currentPage,
+  totalPages,
+  pageSize,
+  totalResults,
+  onPageChange
+}: Props) {
   return (
     <Pagination
-      currentPage={config.currentPage}
-      totalPages={config.totalPages}
-      pageSize={config.pageSize}
-      totalResults={config.totalResults}
-      onPageChange={handlePageChange}
-      align={config.align}
-      showPrevNextText={config.showPrevNextText}
-      showPages={config.showPages}
-      showResults={config.showResults}
+      currentPage={currentPage}
+      totalPages={totalPages}
+      pageSize={pageSize}
+      totalResults={totalResults}
+      onPageChange={onPageChange}
+      align="center"
+      showPrevNextText
+      showPages
+      showResults
       className="p-4"
     />
   );
