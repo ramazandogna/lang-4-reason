@@ -1,10 +1,15 @@
+'use client';
 import Link from '@/components/ui/Link';
 import { Button } from '../ui/Button';
 import { Input } from '../ui/Input';
 import { Section } from '../ui/Section';
 import { Mail } from 'lucide-react';
+import { useNewsletterForm } from '@/hooks/useNewsletterForm';
 
 function Footer() {
+  const { mail, handleChange, helper, variant, handleMailSubmit } =
+    useNewsletterForm();
+
   return (
     <Section className="py-16!">
       <span className="container mx-auto flex w-full flex-col gap-16 max-md:gap-12">
@@ -15,22 +20,31 @@ function Footer() {
               Only updates and special offers. No spams.
             </p>
           </div>
-          <div className="flex items-center justify-center gap-2 max-md:flex-col">
+          <form
+            onSubmit={handleMailSubmit}
+            className="flex justify-center gap-2 max-md:flex-col"
+          >
             <Input
-              leftIcon={<Mail className="h-5 w-5" />}
+              name="email"
+              leftIcon={<Mail size={20} />}
               placeholder="Enter your email.."
               className="max-md:w-full"
               type="email"
+              value={mail}
+              onChange={handleChange}
+              variant={variant}
+              helperText={helper}
             />
             <Button
               size="lg"
               variant="primary"
               color="primary"
               className="text-md whitespace-nowrap! max-md:w-full"
+              type="submit"
             >
               Abone ol
             </Button>
-          </div>
+          </form>
         </div>
         <div className="group flex items-center justify-between max-md:flex-col max-md:justify-center max-md:gap-4">
           <Link href="/">

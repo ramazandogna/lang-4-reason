@@ -1,34 +1,47 @@
+'use client';
 import { Input } from '@/components/ui/Input';
-import React from 'react';
 import { Mail } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
+import { useNewsletterForm } from '@/hooks/useNewsletterForm';
 
 function Newsletter() {
+  const { mail, variant, helper, handleMailSubmit, handleChange } =
+    useNewsletterForm();
+
   return (
     <div className="flex items-center justify-center text-center">
       <span className="mx-auto flex w-full max-w-[800px] flex-col gap-[20px]">
-        <h3>Bületinimize Abone Ol</h3>
+        <h3>Bültenimize Abone Ol</h3>
         <p className="mb-[20px] text-center text-xl font-light">
           Volutpat commodo sed egestas egestas fringilla phasellus. Donec ac
           odio tempor orci dapibus ultrices. Ut lectus arcu bibendum at varius
           vel pharetra vel.
         </p>
-        <div className="flex items-center justify-center gap-2 max-md:flex-col">
+        <form
+          onSubmit={handleMailSubmit}
+          className="flex justify-center gap-2 max-md:flex-col"
+        >
           <Input
-            leftIcon={<Mail className="h-5 w-5" />}
+            name="email"
+            leftIcon={<Mail size={20} />}
             placeholder="Enter your email.."
             className="max-md:w-full"
             type="email"
+            value={mail}
+            onChange={handleChange}
+            variant={variant}
+            helperText={helper}
           />
           <Button
             size="lg"
             variant="primary"
             color="primary"
             className="text-md whitespace-nowrap! max-md:w-full"
+            type="submit"
           >
             Abone ol
           </Button>
-        </div>
+        </form>
       </span>
     </div>
   );
