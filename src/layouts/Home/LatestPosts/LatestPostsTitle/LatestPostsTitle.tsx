@@ -27,7 +27,10 @@ function LatestPostsTitle() {
           align="center"
           className="group ml-auto flex min-w-auto justify-center py-4! text-center font-bold whitespace-nowrap max-md:mt-4 max-md:w-full"
           rightIcon={
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            <ArrowRight
+              size={16}
+              className="transition-transform group-hover:translate-x-1"
+            />
           }
         >
           Tüm Paylaşımları Gör

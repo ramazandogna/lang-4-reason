@@ -38,11 +38,11 @@ function ContentCard({
           blurDataURL={postBlurDataUrl}
           loading="lazy"
         />
-        <Link href="/" className="group inset-0 cursor-pointer">
+        <Link href="/" className="group inset-0 flex cursor-pointer">
           <Button
             rightIcon={
               <ArrowUpRight
-                className="text-white transition-all duration-300 group-hover:scale-105 group-hover:rotate-45"
+                className="m-auto text-white transition-all duration-300 group-hover:scale-105 group-hover:rotate-45"
                 size={20}
               />
             }

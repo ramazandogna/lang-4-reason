@@ -1,4 +1,3 @@
-// src/components/ui/Pagination/Pagination.tsx
 'use client';
 
 import { cn } from '@/lib/cn';
@@ -23,7 +22,9 @@ export default function Pagination({
 
   className = ''
 }: PaginationProps) {
-  const { width } = useResponsive();
+  const { width, isClient } = useResponsive();
+
+  if (!isClient) return null;
 
   // --- MOBİL LAYOUT ---
   if (width < 640) {
@@ -150,7 +151,7 @@ export default function Pagination({
           )}
         >
           <span className="transition-all duration-300 group-hover:text-[var(--accent)]!">
-            {totalResults.toLocaleString()}
+            {totalResults}
           </span>{' '}
           sonuçtan{' '}
           <span className="transition-all duration-300 group-hover:text-[var(--accent)]!">

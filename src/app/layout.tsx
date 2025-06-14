@@ -27,7 +27,12 @@ export default async function RootLayout({
   const theme = await getInitialTheme();
 
   return (
-    <html lang="en" data-theme={theme} className={plusJakarta.variable}>
+    <html
+      lang="tr"
+      data-theme={theme}
+      className={plusJakarta.variable}
+      suppressHydrationWarning
+    >
       <body className="flex min-h-screen flex-col justify-center bg-[var(--background)] text-[var(--text)] transition-colors duration-300">
         <ThemeProvider defaultTheme={theme}>
           <ResponsiveProvider>

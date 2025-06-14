@@ -20,7 +20,7 @@ export default function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const { toggleTheme } = useTheme();
-  const { width } = useResponsive();
+  const { width, isClient } = useResponsive();
 
   useEffect(() => {
     // Menü açıksa body scroll'u engelle
@@ -31,7 +31,7 @@ export default function Header() {
     }
 
     // Ekran genişliği büyüyünce menüyü kapat
-    if (width > 768) {
+    if (width > 1024) {
       setOpen(false);
     }
   }, [open, width]);
@@ -40,15 +40,17 @@ export default function Header() {
     setOpen(false);
   }, [pathname]);
 
+  if (!isClient) return null;
+
   return (
     <>
-      <header className="fixed top-0 right-0 left-0 z-50 flex h-20 w-full items-center justify-center border-b border-[var(--text)]/10 bg-[var(--background)]/60 backdrop-blur-lg max-md:h-18">
+      <header className="fixed top-0 right-0 left-0 z-50 flex h-20 w-full items-center justify-center border-b border-[var(--text)]/10 bg-[var(--background)]/60 backdrop-blur-lg max-lg:h-18">
         <div className="container mx-auto flex w-full items-center justify-between">
           <div className="flex gap-12">
             <Link href="/">
               <div className="text-3xl font-bold">Logo</div>
             </Link>
-            <ul className="text-md flex items-center justify-center gap-8 font-bold max-md:hidden">
+            <ul className="text-md flex items-center justify-center gap-8 font-bold max-lg:hidden">
               {navItems.slice(1).map((item) => (
                 <Link variant="menu" key={item.path} href={item.path}>
                   <li className="my-auto">{item.name}</li>
@@ -57,21 +59,21 @@ export default function Header() {
             </ul>
           </div>
           <div className="flex items-center justify-center gap-2">
-            <Button className="max-md:hidden" variant="secondary">
+            <Button className="max-lg:hidden" variant="secondary">
               İletişime Geç
             </Button>
-            <Button className="max-md:hidden" variant="primary" color="gray">
+            <Button className="max-lg:hidden" variant="primary" color="gray">
               Ücretsiz Dene
             </Button>
             <Button
               iconOnly
-              leftIcon={<SunMoon className="h-6 w-6" />}
+              leftIcon={<SunMoon size={24} />}
               variant="primary"
-              className="max-md:hidden"
+              className="max-lg:hidden"
               color="theme"
               onClick={toggleTheme}
             />
-            <span className="md:hidden">
+            <span className="lg:hidden">
               <HamburgerIcon checked={open} onChange={setOpen} />
             </span>
           </div>
@@ -80,7 +82,7 @@ export default function Header() {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed top-20 right-0 bottom-0 left-0 z-40 transition-opacity md:hidden! ${open ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'}`}
+        className={`fixed top-20 right-0 bottom-0 left-0 z-40 transition-opacity lg:hidden! ${open ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'}`}
       >
         <div
           className="fixed inset-0 bg-white/20 backdrop-blur-sm dark:bg-black/20"

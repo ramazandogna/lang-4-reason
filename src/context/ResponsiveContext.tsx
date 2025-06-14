@@ -15,6 +15,7 @@ type ResponsiveContextType = {
   isTablet: boolean;
   isDesktop: boolean;
   breakpoint: 'mobile' | 'tablet' | 'desktop';
+  isClient: boolean; // 👈 yeni eklendi
 };
 
 const ResponsiveContext = createContext<ResponsiveContextType | undefined>(
@@ -23,9 +24,11 @@ const ResponsiveContext = createContext<ResponsiveContextType | undefined>(
 
 export function ResponsiveProvider({ children }: { children: ReactNode }) {
   const [size, setSize] = useState<{ width: number; height: number }>({
-    width: typeof window !== 'undefined' ? window.innerWidth : 0,
-    height: typeof window !== 'undefined' ? window.innerHeight : 0
+    width: 0,
+    height: 0
   });
+
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -33,6 +36,7 @@ export function ResponsiveProvider({ children }: { children: ReactNode }) {
     };
     window.addEventListener('resize', handleResize);
     handleResize();
+    setIsClient(true);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
@@ -52,7 +56,8 @@ export function ResponsiveProvider({ children }: { children: ReactNode }) {
     isMobile,
     isTablet,
     isDesktop,
-    breakpoint
+    breakpoint,
+    isClient
   };
 
   return (
