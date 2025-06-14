@@ -10,13 +10,13 @@ import { ResponsiveProvider } from '@/context/ResponsiveContext';
 const plusJakarta = Plus_Jakarta_Sans({
   variable: '--font-plus-jakarta',
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'], // Figma'da hangi ağırlıklar varsa ekle
+  weight: ['400', '500', '600', '700', '800'],
   display: 'swap'
 });
 
 export const metadata: Metadata = {
-  title: 'PekAfilli',
-  description: 'PekAfilli şeyler'
+  title: 'Lang for Reason',
+  description: 'Amacına uygun dil öğrenme platformu'
 };
 
 export default async function RootLayout({

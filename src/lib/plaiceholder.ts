@@ -1,7 +1,4 @@
-// lib/plaiceholder.ts
 import { getPlaiceholder } from 'plaiceholder';
-
-// Eğer Buffer yoksa import et
 import { Buffer } from 'buffer';
 
 export async function getBlurDataURL(src: string) {
