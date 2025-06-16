@@ -2,7 +2,6 @@
 
 import { ContentCard } from '@/components/ui/ContentCard';
 import { mockPosts } from '@/mocks/mockPosts'; // doğru path ile düzelt
-import React from 'react';
 
 function LatestPostsCards() {
   return (
@@ -10,13 +9,15 @@ function LatestPostsCards() {
       {mockPosts.slice(0, 3).map((post) => (
         <ContentCard
           key={post.id}
-          postImage={post.image}
+          image={post.image}
           avatar={post.avatar}
           category={post.category}
           title={post.title}
           desc={post.desc}
           author={post.author}
           readTime={post.readTime}
+          slug={post.slug}
+          id={post.id}
         />
       ))}
     </div>

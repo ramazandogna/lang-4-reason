@@ -22,7 +22,7 @@ function Footer() {
           </div>
           <form
             onSubmit={handleMailSubmit}
-            className="flex justify-center gap-2 max-md:flex-col"
+            className="flex justify-center gap-2 text-center max-md:flex-col"
           >
             <Input
               name="email"

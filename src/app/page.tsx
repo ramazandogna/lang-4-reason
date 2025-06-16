@@ -1,7 +1,7 @@
 import { Section } from '@/components/ui/Section';
-import LatestPosts from '@/layouts/Home/LatestPosts';
+import { LatestPosts } from '@/layouts/Home/LatestPosts';
 import { Newsletter } from '@/layouts/Home/Newsletter';
-import Posts from '@/layouts/Home/Posts';
+import { Posts } from '@/layouts/Home/Posts';
 
 export default function TypographyShowcase() {
   return (

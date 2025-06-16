@@ -14,13 +14,15 @@ function PostsCards({ posts }: Props) {
       {posts.map((post) => (
         <ContentCard
           key={post.id}
-          postImage={post.image}
+          image={post.image}
           avatar={post.avatar}
           category={post.category}
           title={post.title}
           desc={post.desc}
           author={post.author}
           readTime={post.readTime}
+          slug={post.slug}
+          id={post.id}
         />
       ))}
     </div>

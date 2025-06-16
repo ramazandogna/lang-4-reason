@@ -2,43 +2,37 @@ import Image from 'next/image';
 import { ArrowUpRight } from 'lucide-react';
 import { Button } from '../Button';
 import Link from '@/components/ui/Link';
-import { ContentCardProps } from './ContantCard.types';
+import { MockPost } from '@/mocks/mockTypes';
+import { getImageSrc, getBlurData } from '@/lib/imageUtilis';
 
 function ContentCard({
-  postImage,
+  image,
   avatar,
-  category = 'UI/UX Design',
-  title = 'Blog post title',
-  desc = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt...',
-  author = 'Azunyan U. Wu',
-  readTime = '5min read'
-}: ContentCardProps) {
-  const isStaticImage =
-    typeof postImage !== 'string' && 'blurDataURL' in postImage;
-  const postImageSrc =
-    typeof postImage === 'string'
-      ? postImage
-      : 'src' in postImage
-        ? postImage.src
-        : postImage;
-  const postBlurDataUrl = isStaticImage ? postImage.blurDataURL : undefined;
-
-  const avatarBlurDataUrl = avatar.blurDataURL;
+  category,
+  title,
+  desc,
+  author,
+  readTime,
+  slug
+}: MockPost) {
+  const postImageSrc = getImageSrc(image);
+  const postBlurDataUrl = getBlurData(image);
+  const avatarBlurDataUrl = getBlurData(avatar);
 
   return (
     <div className="flex flex-col overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm transition hover:shadow-lg">
       <div className="relative h-[220px] w-full overflow-hidden rounded-3xl">
-        <Image
-          src={postImageSrc}
-          alt="Post Görsel"
-          fill
-          className="object-cover"
-          sizes="(max-width: 600px) 100vw, 420px"
-          placeholder={postBlurDataUrl ? 'blur' : 'empty'}
-          blurDataURL={postBlurDataUrl}
-          loading="lazy"
-        />
-        <Link href="/" className="group inset-0 flex cursor-pointer">
+        <Link href={`/${slug}`} className="group inset-0 flex cursor-pointer">
+          <Image
+            src={postImageSrc}
+            alt={title}
+            fill
+            className="object-cover"
+            sizes="(max-width: 600px) 100vw, 420px"
+            placeholder={postBlurDataUrl ? 'blur' : 'empty'}
+            blurDataURL={postBlurDataUrl}
+            loading="lazy"
+          />
           <Button
             rightIcon={
               <ArrowUpRight
@@ -50,11 +44,12 @@ function ContentCard({
           />
         </Link>
       </div>
+
       <div className="flex flex-col gap-2 p-6 pb-4">
         <span className="mb-2 text-xs font-bold text-indigo-600">
           {category}
         </span>
-        <Link href="/">
+        <Link href={`/${slug}`}>
           <h2 className="mb-1 line-clamp-2 text-2xl font-extrabold text-gray-900">
             {title}
           </h2>
@@ -62,6 +57,7 @@ function ContentCard({
         <p className="mb-3 line-clamp-2 text-base font-normal text-gray-500">
           {desc}
         </p>
+
         <div className="flex items-center justify-between pt-2">
           <div className="flex items-center gap-2">
             <Image
