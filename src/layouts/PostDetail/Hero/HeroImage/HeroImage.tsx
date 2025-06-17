@@ -1,10 +1,8 @@
 import Image from 'next/image';
-import { HeroImageProps } from '../Hero.types';
+import { HeroImageProps } from '../../../../types/Hero.types';
 import { getBlurData, getImageSrc } from '@/lib/imageUtilis';
 
 function HeroImage({ hero }: { hero: HeroImageProps }) {
-  console.log(hero);
-
   const imageSrc = getImageSrc(hero.postImage);
   const blurDataURL = getBlurData(hero.postImage);
 
