@@ -7,9 +7,11 @@ export interface HeroImageProps {
 }
 
 export interface HeroTitleProps {
-  category?: string;
   title: string;
-  author?: string;
-  readTime?: string;
+  category: string;
+  subcategories: string[];
+  author: string;
+  readTime: string;
   className?: string;
+  date: string;
 }
