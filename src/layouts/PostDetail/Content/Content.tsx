@@ -1,28 +1,12 @@
 import Image from 'next/image';
 import { ContentProps } from './Content.types';
-import { getImageSrc, getBlurData } from '@/lib/imageUtilis';
+import { getBlurData } from '@/lib/imageUtilis';
 
 export default function Content({ post }: { post: ContentProps }) {
-  const imageSrc = getImageSrc(post.postImage);
-  const blurDataURL = getBlurData(post.postImage);
   const avatarBlurDataURL = getBlurData(post.avatar);
 
   return (
     <article className="mx-auto max-w-4xl px-4 pt-10 pb-20">
-      <div className="relative mb-10 aspect-[16/9] w-full overflow-hidden rounded-2xl">
-        <Image
-          src={imageSrc}
-          alt={post.title || 'Post image'}
-          fill
-          className="rounded-2xl object-cover"
-          placeholder={blurDataURL ? 'blur' : 'empty'}
-          blurDataURL={blurDataURL}
-          sizes="(max-width: 768px) 100vw, 1024px"
-          loading="eager"
-          priority
-        />
-      </div>
-
       <div className="mb-4 text-sm font-semibold text-indigo-600">
         {post.category}
       </div>

@@ -105,6 +105,12 @@ body {
   padding: 0 16px;
 }
 
+.post-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
 .scrollbar-hide {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
