@@ -1,6 +1,6 @@
 import { Button } from '../Button';
 import { NavbarProps } from './Navbar.types';
-import { cn } from '@/lib/cn';
+import { cn } from '@/utils/cn';
 
 export default function Navbar({
   items,

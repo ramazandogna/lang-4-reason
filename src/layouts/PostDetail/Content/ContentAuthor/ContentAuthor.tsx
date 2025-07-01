@@ -1,9 +1,9 @@
 'use client';
 import { Button } from '@/components/ui/Button';
-import { getBlurData } from '@/lib/imageUtilis';
+import { getBlurData } from '@/utils/imageUtilis';
 import { Copy, Facebook, Linkedin, Twitter } from 'lucide-react';
 import Image from 'next/image';
-import type { PostImageType } from '@/types/Mock.types.ts';
+import type { PostImageType } from '@/types/Mock/Mock.types.ts';
 import Link from '@/components/ui/Link';
 
 interface ContentAuthorProps {

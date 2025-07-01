@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '@/lib/cn';
+import { cn } from '@/utils/cn';
 import { PAGINATION_LABELS, PAGINATION_DEFAULTS } from './Pagination.constants';
 import type { PaginationProps, PageItem } from './Pagination.types';
 import { ChevronLeft, ChevronRight } from 'lucide-react';

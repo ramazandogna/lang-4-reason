@@ -1,7 +1,7 @@
 import React from 'react';
 import { Content } from './Content';
 import { Hero } from './Hero';
-import { MockPostType } from '@/types/Mock.types.ts';
+import { MockPostType } from '@/types/Mock/Mock.types.ts';
 import { LatestContent } from './Content/LatestContent';
 import { Newsletter } from '../Home/Newsletter';
 import { Section } from '@/components/ui/Section';

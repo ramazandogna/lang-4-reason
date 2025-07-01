@@ -1,7 +1,7 @@
 // src/mocks/mockPosts.ts
 import { postImages } from '@/images/post-images';
 import { avatarImages } from '@/images/avatar-images';
-import type { MockPostType } from '@/types/Mock.types.ts';
+import type { MockPostType } from '@/types/Mock/Mock.types.ts';
 
 export const mockPosts: MockPostType[] = [
   {

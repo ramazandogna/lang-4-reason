@@ -2,8 +2,8 @@ import Image from 'next/image';
 import { ArrowUpRight } from 'lucide-react';
 import { Button } from '../Button';
 import Link from '@/components/ui/Link';
-import { MockPost } from '@/types/Mock.types.ts';
-import { getImageSrc, getBlurData } from '@/lib/imageUtilis';
+import { MockPost } from '@/types/Mock/Mock.types.ts';
+import { getImageSrc, getBlurData } from '@/utils/imageUtilis';
 
 function ContentCard({
   image,

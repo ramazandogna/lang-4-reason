@@ -1,4 +1,4 @@
-import type { MockPostType } from '@/types/Mock.types.ts';
+import type { MockPostType } from '@/types/Mock/Mock.types.ts';
 import HeroTitle from './HeroTitle/HeroTitle';
 import HeroImage from './HeroImage/HeroImage';
 

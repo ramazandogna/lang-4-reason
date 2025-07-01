@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import { HeroImageProps } from '../../../../types/Hero.types';
-import { getBlurData, getImageSrc } from '@/lib/imageUtilis';
+import { HeroImageProps } from '../../../../types/Mock/Hero.types';
+import { getBlurData, getImageSrc } from '@/utils/imageUtilis';
 
 function HeroImage({ hero }: { hero: HeroImageProps }) {
   const imageSrc = getImageSrc(hero.postImage);

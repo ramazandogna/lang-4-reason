@@ -1,7 +1,7 @@
 // app/popular/page.tsx
 import Image from 'next/image';
-import { getBlurDataURL } from '@/lib/plaiceholder';
-import { getImageSrc } from '@/lib/imageUtilis';
+import { getBlurDataURL } from '@/utils/plaiceholder';
+import { getImageSrc } from '@/utils/imageUtilis';
 
 export default async function PopularPage() {
   const externalImageSrc =

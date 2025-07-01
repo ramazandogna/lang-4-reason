@@ -1,5 +1,5 @@
 import { StaticImageData } from 'next/image';
-import { PostImageType } from '@/types/Mock.types.ts';
+import { PostImageType } from '@/types/Mock/Mock.types.ts';
 
 export function getImageSrc(image: PostImageType): string | StaticImageData {
   if (typeof image === 'string') return image;

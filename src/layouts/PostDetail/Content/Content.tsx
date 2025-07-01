@@ -1,4 +1,4 @@
-import type { MockPostType } from '@/types/Mock.types.ts';
+import type { MockPostType } from '@/types/Mock/Mock.types.ts';
 import { ContentAuthor } from './ContentAuthor';
 
 export default function Content({ post }: { post: MockPostType }) {

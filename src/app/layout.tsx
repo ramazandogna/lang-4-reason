@@ -1,7 +1,7 @@
 import '../styles/globals.css';
 import type { Metadata } from 'next';
 import { Plus_Jakarta_Sans } from 'next/font/google';
-import { getInitialTheme } from '@/lib/get-initial-theme';
+import { getInitialTheme } from '@/utils/get-initial-theme';
 import { ThemeProvider } from './theme-provider';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';

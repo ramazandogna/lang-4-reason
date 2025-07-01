@@ -1,5 +1,5 @@
 import { Badge } from '@/components/ui/Badge';
-import { HeroTitleProps } from '../../../../types/Hero.types';
+import { HeroTitleProps } from '../../../../types/Mock/Hero.types';
 
 function HeroTitle({ hero }: { hero: HeroTitleProps }) {
   const date = new Date(hero.date);

@@ -1,4 +1,7 @@
-import { PostImageType, ImageWithOptionalBlur } from '@/types/Mock.types.ts';
+import {
+  PostImageType,
+  ImageWithOptionalBlur
+} from '@/types/Mock/Mock.types.ts';
 
 export interface ContentProps {
   postImage: PostImageType;

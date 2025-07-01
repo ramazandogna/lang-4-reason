@@ -1,5 +1,5 @@
 import NextLink from 'next/link';
-import { cn } from '@/lib/cn';
+import { cn } from '@/utils/cn';
 import type { LinkProps } from './Link.types';
 import { LINK_VARIANTS } from './Link.constants';
 import './Link.css';

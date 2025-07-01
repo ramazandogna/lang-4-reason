@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '@/lib/cn';
+import { cn } from '@/utils/cn';
 import { INPUT_BASE, INPUT_VARIANTS, INPUT_HELPER } from './Input.constants';
 import type { InputProps } from './Input.types';
 
