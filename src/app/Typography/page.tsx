@@ -24,7 +24,7 @@ const FONT_WEIGHTS = [
 ];
 function TypographyPage() {
   return (
-    <div className="mx-auto space-y-8 py-8">
+    <div className="container mx-auto space-y-8 py-8">
       <h2 className="mb-6 text-3xl font-bold">Typography Scale Showcase</h2>
       {FONT_SIZES.map((size) => (
         <section key={size.label} className="mb-6">

@@ -9,6 +9,11 @@ const nextConfig: NextConfig = {
         hostname: 'images.pexels.com',
         port: '',
         pathname: '/photos/**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'wp.pekafilli.com',
+        port: ''
       }
     ]
   }

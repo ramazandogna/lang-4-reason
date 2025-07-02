@@ -10,7 +10,7 @@ export default async function PopularPage() {
   const blurDataURL = await getBlurDataURL(externalImageSrc);
 
   return (
-    <div className="container">
+    <div className="container mx-auto">
       <h1 className="mb-4 text-2xl font-bold">Popüler</h1>
       <Image
         src={getImageSrc(externalImageSrc)}

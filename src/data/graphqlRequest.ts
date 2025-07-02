@@ -1,4 +1,7 @@
-export default async function graphqlRequest(query: string, variables?: object) {
+export default async function graphqlRequest(
+  query: string,
+  variables?: object
+) {
   const url = process.env.GRAPHQL_URL;
   const headers = { 'Content-Type': 'application/json' };
 
@@ -9,6 +12,7 @@ export default async function graphqlRequest(query: string, variables?: object) 
 
   if (!url) throw new Error('GRAPHQL_URL tanımlı değil');
   try {
+    console.log('GRAPHQL_URL:', process.env.GRAPHQL_URL);
     const res = await fetch(url, {
       method: 'POST',
       headers,

@@ -1,6 +1,6 @@
 export default function ReadingListPage() {
   return (
-    <div>
+    <div className="container mx-auto">
       <h1>Okuma Listem</h1>
     </div>
   );
