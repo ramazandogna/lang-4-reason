@@ -16,7 +16,6 @@ interface SEOProps {
 export function generateMetadata({
   title,
   description,
-  image,
   url,
   type = 'website',
   publishedTime,
@@ -26,7 +25,6 @@ export function generateMetadata({
 }: SEOProps = {}): Metadata {
   const finalTitle = title ? `${title} | ${SITE.NAME}` : SEO.DEFAULT_TITLE;
   const finalDescription = description || SEO.DEFAULT_DESCRIPTION;
-  const finalImage = image || SEO.DEFAULT_IMAGE;
   const finalUrl = url || SITE.URL;
 
   const metadata: Metadata = {
@@ -46,22 +44,6 @@ export function generateMetadata({
         'max-image-preview': 'large',
         'max-snippet': -1
       }
-    },
-    openGraph: {
-      type: type,
-      locale: SITE.LOCALE,
-      url: finalUrl,
-      title: finalTitle,
-      description: finalDescription,
-      siteName: SITE.NAME,
-      images: [
-        {
-          url: finalImage,
-          width: SEO.DEFAULT_IMAGE_WIDTH,
-          height: SEO.DEFAULT_IMAGE_HEIGHT,
-          alt: finalTitle
-        }
-      ]
     },
     // twitter: {
     //   card: SEO.TWITTER_CARD_TYPE,
@@ -112,7 +94,18 @@ export function generateStructuredData({
   modifiedTime,
   author = SITE.AUTHOR
 }: StructuredDataProps = {}) {
-  const structuredData: any = {
+  const structuredData: {
+    '@context': string;
+    '@type': string;
+    name: string;
+    description: string;
+    url: string;
+    author: { '@type': string; name: string };
+    publisher: { '@type': string; name: string; url: string };
+    image: string;
+    publishedTime?: string;
+    modifiedTime?: string;
+  } = {
     '@context': 'https://schema.org',
     '@type': type,
     name: title || SITE.NAME,

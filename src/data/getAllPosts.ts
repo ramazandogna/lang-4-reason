@@ -1,8 +1,8 @@
-import { PostResponse } from '../types/posts';
+import { PostNode, PostResponse } from '../types/posts';
 import graphqlRequest from './graphqlRequest';
 import { getPlaiceholder } from 'plaiceholder';
 
-async function enrichPostWithBlur(post: any) {
+async function enrichPostWithBlur(post: PostNode) {
   const src =
     post.featuredImage?.node?.mediaDetails?.sizes?.[0]?.sourceUrl || '';
   let blurDataURL = undefined;

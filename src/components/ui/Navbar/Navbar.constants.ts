@@ -1,8 +1,8 @@
-import { getCategorySlugs } from '@/data/getCategorySlugs';
-import { getCategoryDetails } from '@/data/getCategoryDetails';
+import type { PostNode } from '@/types/posts';
+import type { CategoryNode } from '@/types/posts';
 
-export function generateNavItems(posts: any[], activeKey: string) {
-  const categories = [
+export function generateNavItems(posts: PostNode[], activeKey: string) {
+  const categories: { key: string; label: string }[] = [
     { key: 'Activities', label: 'Activities' },
     { key: 'Destinations', label: 'Destinations' },
     { key: 'Inspiration', label: 'Inspiration' },
@@ -19,7 +19,7 @@ export function generateNavItems(posts: any[], activeKey: string) {
     ...categories.map((cat) => {
       // Her kategori için duplicate postları engelle
       const categoryPosts = posts.filter((p) =>
-        p.categories?.nodes?.some((c: any) => c.name === cat.label)
+        p.categories?.nodes?.some((c: CategoryNode) => c.name === cat.label)
       );
       const uniquePosts = Array.from(new Set(categoryPosts.map((p) => p.slug)));
       return {
