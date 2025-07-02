@@ -1,56 +1,14 @@
-import type { MockPostType } from '@/types/Mock/Mock.types.ts';
+import { PostType } from '@/types/post';
 import { ContentAuthor } from './ContentAuthor';
 
-export default function Content({ post }: { post: MockPostType }) {
-  const contentAuthor = {
-    avatar: post.avatar,
-    author: post.author,
-    slug: post.slug
-  };
-
+export default function Content({ post }: { post: PostType }) {
   return (
     <article>
       <h1 className="mb-2 text-4xl font-extrabold text-gray-900">
         {post.title}
       </h1>
-      <p className="mb-10 text-lg text-gray-700">
-        {post.desc}
-        {post.desc}
-        {post.desc}
-      </p>
-      <p className="mb-10 text-lg text-gray-700">
-        {post.desc}
-        {post.desc}
-        {post.desc}
-      </p>
-      <p className="mb-10 text-lg text-gray-700">
-        {post.desc}
-        {post.desc}
-        {post.desc}
-        {post.desc}
-        {post.desc}
-      </p>
-      <p className="mb-10 text-lg text-gray-700">
-        {post.desc}
-        {post.desc}
-        {post.desc}
-        {post.desc}
-        {post.desc}
-      </p>
-      <p className="mb-10 text-lg text-gray-700">
-        {post.desc}
-        {post.desc}
-        {post.desc}
-        {post.desc}
-        {post.desc}
-      </p>
-      <p className="mb-10 text-lg text-gray-700">
-        {post.desc}
-        {post.desc}
-        {post.desc}
-      </p>
-
-      <ContentAuthor contentAuthor={contentAuthor} />
+      <p className="mb-10 text-lg text-gray-700">{post.content}</p>
+      <ContentAuthor contentSlug={post.slug} contentAuthor={post.author.node} />
     </article>
   );
 }

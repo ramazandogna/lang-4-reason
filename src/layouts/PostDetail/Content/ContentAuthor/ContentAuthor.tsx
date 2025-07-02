@@ -1,25 +1,21 @@
 'use client';
 import { Button } from '@/components/ui/Button';
-import { getBlurData } from '@/utils/imageUtilis';
 import { Copy, Facebook, Linkedin, Twitter } from 'lucide-react';
 import Image from 'next/image';
-import type { PostImageType } from '@/types/Mock/Mock.types.ts';
 import Link from '@/components/ui/Link';
+import { AuthorNode } from '@/types/post';
 
-interface ContentAuthorProps {
-  contentAuthor: {
-    avatar: PostImageType; // artık hem StaticImageData hem remote URL gelebilir
-    author: string;
-    slug: string;
-  };
-}
+type ContentAuthorType = {
+  contentAuthor: AuthorNode;
+  contentSlug: string;
+};
 
-export default function ContentAuthor({ contentAuthor }: ContentAuthorProps) {
-  const { avatar, author, slug } = contentAuthor;
-  const blurDataURL = getBlurData(avatar);
-
+export default function ContentAuthor({
+  contentAuthor,
+  contentSlug
+}: ContentAuthorType) {
   // Oluşturulacak paylaşım URL’si
-  const postUrl = `${typeof window !== 'undefined' ? window.location.origin : ''}/${slug}`;
+  const postUrl = `${typeof window !== 'undefined' ? window.location.origin : ''}/${contentSlug}`;
 
   const handleCopy = () => {
     if (typeof navigator !== 'undefined' && navigator.clipboard) {
@@ -31,17 +27,21 @@ export default function ContentAuthor({ contentAuthor }: ContentAuthorProps) {
   return (
     <div className="flex items-center justify-between gap-3">
       <div className="flex items-center gap-3">
-        <Image
-          src={contentAuthor.avatar as string} // Type assertion to string
-          alt={contentAuthor.slug ?? author}
-          width={48}
-          height={48}
-          className="rounded-full"
-          placeholder={blurDataURL ? 'blur' : 'empty'}
-          blurDataURL={blurDataURL}
-        />
+        <Link href={`/author/${contentAuthor.slug}`}>
+          <Image
+            src={contentAuthor.avatar?.url || ''} // Type assertion to string
+            alt={contentAuthor.name}
+            width={48}
+            height={48}
+            className="rounded-full"
+            placeholder={contentAuthor.avatar?.blurDataURL ? 'blur' : 'empty'}
+            blurDataURL={contentAuthor.avatar?.blurDataURL}
+          />
+        </Link>
         <div className="text-sm">
-          <div className="font-semibold">{author}</div>
+          <Link href={`/author/${contentAuthor.slug}`}>
+            <div className="font-semibold">{contentAuthor.name}</div>
+          </Link>
           <div className="text-gray-400">Product Designer in Rei Product</div>
         </div>
       </div>

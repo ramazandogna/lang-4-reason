@@ -1,16 +1,17 @@
 import Image from 'next/image';
-import { HeroImageProps } from '../../../../types/Mock/Hero.types';
-import { getBlurData, getImageSrc } from '@/utils/imageUtilis';
 
-function HeroImage({ hero }: { hero: HeroImageProps }) {
-  const imageSrc = getImageSrc(hero.postImage);
-  const blurDataURL = getBlurData(hero.postImage);
+interface HeroImageProps {
+  image: string;
+  blurDataURL?: string;
+  alt?: string;
+}
 
+function HeroImage({ image, blurDataURL, alt }: HeroImageProps) {
   return (
     <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl">
       <Image
-        src={imageSrc}
-        alt={hero.alt || 'Post image'}
+        src={image}
+        alt={alt || 'Post image'}
         fill
         className="rounded-2xl object-cover"
         placeholder={blurDataURL ? 'blur' : 'empty'}

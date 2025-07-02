@@ -1,7 +1,8 @@
 import { Badge } from '@/components/ui/Badge';
-import { HeroTitleProps } from '../../../../types/Mock/Hero.types';
+import { PostType } from '@/types/post';
+import Link from 'next/link';
 
-function HeroTitle({ hero }: { hero: HeroTitleProps }) {
+function HeroTitle({ hero }: { hero: PostType }) {
   const date = new Date(hero.date);
 
   const formatter = new Intl.DateTimeFormat('tr-TR', {
@@ -23,12 +24,24 @@ function HeroTitle({ hero }: { hero: HeroTitleProps }) {
         {finalDate}
       </div>
       <h2 className="">{hero.title}</h2>
-      <div className="flex justify-center gap-2">
-        {hero.subcategories && (
-          <Badge shape="pill" variant="outline" color="danger">
-            {hero.category}
-          </Badge>
-        )}
+      <div className="group flex justify-center gap-2">
+        {hero.categories &&
+          hero.categories.nodes.map((category) => (
+            <Link
+              href={`/category/${category.slug}`}
+              key={category.slug}
+              className="inline-block transition-all duration-300 group-hover:blur-sm hover:scale-[1.02] hover:!blur-none"
+            >
+              <Badge
+                shape="pill"
+                variant="outline"
+                color="danger"
+                className="transition-all duration-300 hover:border-red-500 hover:bg-red-500 hover:text-white"
+              >
+                {category.name}
+              </Badge>
+            </Link>
+          ))}
       </div>
     </div>
   );

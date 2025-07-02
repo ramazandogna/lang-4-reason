@@ -45,6 +45,12 @@ export interface PostType {
 
 export interface AuthorNode {
   name: string;
+  slug?: string;
+  uri?: string;
+  avatar?: {
+    url?: string;
+    blurDataURL?: string;
+  };
 }
 
 export interface Author {

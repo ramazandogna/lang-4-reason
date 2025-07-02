@@ -1,7 +1,8 @@
+import getAllPosts from '@/data/getAllPosts';
 import { LatestPosts } from '@/layouts/Home/LatestPosts';
 
-function LatestContent() {
-  return <LatestPosts />;
-}
+export default async function LatestContent() {
+  const posts = await getAllPosts('', null, 3);
 
-export default LatestContent;
+  return <LatestPosts posts={posts} />;
+}

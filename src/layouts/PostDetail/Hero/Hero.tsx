@@ -1,30 +1,19 @@
-import type { MockPostType } from '@/types/Mock/Mock.types.ts';
 import HeroTitle from './HeroTitle/HeroTitle';
 import HeroImage from './HeroImage/HeroImage';
+import { PostType } from '@/types/post';
 
-function Hero({ hero }: { hero: MockPostType }) {
+export default function Hero({
+  hero
+}: {
+  hero: PostType & { blurDataURL?: string };
+}) {
+  const image =
+    hero.featuredImage?.node?.mediaDetails?.sizes?.[0]?.sourceUrl || '';
+  const blurDataURL = hero.blurDataURL;
   return (
     <div className="flex flex-col gap-16 max-md:gap-10">
-      <HeroTitle
-        hero={{
-          title: hero.title,
-          category: hero.category,
-          author: hero.author,
-          readTime: hero.readTime,
-          className: '',
-          date: hero.date,
-          subcategories: hero.subcategories
-        }}
-      />
-      <HeroImage
-        hero={{
-          postImage: hero.image,
-          alt: hero.title,
-          className: ''
-        }}
-      />
+      <HeroTitle hero={hero} />
+      <HeroImage image={image} blurDataURL={blurDataURL} alt={hero.title} />
     </div>
   );
 }
-
-export default Hero;
