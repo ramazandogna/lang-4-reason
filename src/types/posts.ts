@@ -32,12 +32,14 @@ export interface PostNode {
   };
   title: string;
   author: Author;
+  blurDataURL?: string;
 }
 
 export interface AuthorNode {
   name: string;
   avatar?: {
-    url: string;
+    url?: string;
+    blurDataURL?: string;
   };
   uri?: string;
   slug?: string;

@@ -16,7 +16,35 @@ async function enrichPostWithBlur(post: PostNode) {
       }
     } catch {}
   }
-  return { ...post, blurDataURL };
+
+  // Author avatar için de blur ekle
+  let authorAvatarBlur = undefined;
+  const avatarUrl = post.author?.node?.avatar?.url;
+  if (avatarUrl) {
+    try {
+      const response = await fetch(avatarUrl);
+      if (response.ok) {
+        const buffer = Buffer.from(await response.arrayBuffer());
+        const result = await getPlaiceholder(buffer);
+        authorAvatarBlur = result.base64;
+      }
+    } catch {}
+  }
+
+  return {
+    ...post,
+    blurDataURL,
+    author: {
+      ...post.author,
+      node: {
+        ...post.author?.node,
+        avatar: {
+          ...post.author?.node?.avatar,
+          blurDataURL: authorAvatarBlur
+        }
+      }
+    }
+  };
 }
 
 export default async function getAllPosts(

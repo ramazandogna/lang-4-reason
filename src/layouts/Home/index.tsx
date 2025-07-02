@@ -12,7 +12,7 @@ function Home({ posts }: { posts: PostResponse }) {
         <LatestPosts posts={posts} />
       </Section>
       <Section className="container mx-auto w-full pt-0!">
-        <Posts initialPosts={posts} />
+        <Posts posts={posts} />
       </Section>
       <Section className="mx-auto w-full bg-[var(--secondary-bg)]/30 py-16!">
         <span className="container">

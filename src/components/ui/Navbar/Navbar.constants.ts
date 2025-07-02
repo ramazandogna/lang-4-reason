@@ -19,7 +19,13 @@ export function generateNavItems(posts: PostNode[], activeKey: string) {
     ...categories.map((cat) => {
       // Her kategori için duplicate postları engelle
       const categoryPosts = posts.filter((p) =>
-        p.categories?.nodes?.some((c: CategoryNode) => c.name === cat.label)
+        p.categories?.nodes?.some(
+          (c: CategoryNode) =>
+            c.name === cat.label ||
+            c.slug === cat.key ||
+            c.name === cat.key ||
+            c.slug === cat.label
+        )
       );
       const uniquePosts = Array.from(new Set(categoryPosts.map((p) => p.slug)));
       return {
