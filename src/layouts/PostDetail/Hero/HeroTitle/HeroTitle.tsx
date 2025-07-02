@@ -20,17 +20,17 @@ function HeroTitle({ hero }: { hero: PostType }) {
 
   return (
     <div className="post-container mx-auto flex w-full flex-col gap-6 text-center">
-      <div className="text-center font-bold text-[var(--accent)]">
+      <div className="fade-up fade-up-delay-1 text-center font-bold text-[var(--accent)]">
         {finalDate}
       </div>
-      <h2 className="">{hero.title}</h2>
+      <h2 className="fade-up fade-up-delay-2">{hero.title}</h2>
       <div className="group flex justify-center gap-2">
         {hero.categories &&
-          hero.categories.nodes.map((category) => (
+          hero.categories.nodes.map((category, idx) => (
             <Link
               href={`/category/${category.slug}`}
               key={category.slug}
-              className="inline-block transition-all duration-300 group-hover:blur-sm hover:scale-[1.02] hover:!blur-none"
+              className={`fade-up fade-up-delay-${idx + 3} inline-block transition-all duration-300 group-hover:blur-sm hover:scale-[1.02] hover:!blur-none`}
             >
               <Badge
                 shape="pill"

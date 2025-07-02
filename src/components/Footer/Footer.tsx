@@ -7,7 +7,7 @@ import { Mail } from 'lucide-react';
 import { useNewsletterForm } from '@/hooks/useNewsletterForm';
 
 function Footer() {
-  const { mail, handleChange, helper, variant, handleMailSubmit } =
+  const { mail, handleChange, helper, variant, handleMailSubmit, isEmpty } =
     useNewsletterForm();
 
   return (
@@ -41,6 +41,7 @@ function Footer() {
               color="primary"
               className="text-md whitespace-nowrap! max-md:w-full"
               type="submit"
+              disabled={isEmpty}
             >
               Abone ol
             </Button>

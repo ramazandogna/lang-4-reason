@@ -3,7 +3,7 @@ import { ContentAuthor } from './ContentAuthor';
 
 export default function Content({ post }: { post: PostType }) {
   return (
-    <article>
+    <article className="fade-up fade-up-delay-5">
       <h1 className="mb-2 text-4xl font-extrabold text-gray-900">
         {post.title}
       </h1>

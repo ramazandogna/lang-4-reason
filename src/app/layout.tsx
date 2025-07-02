@@ -1,4 +1,5 @@
 import '../styles/globals.css';
+import '../styles/animates.css';
 import type { Metadata } from 'next';
 import { Plus_Jakarta_Sans } from 'next/font/google';
 import { getInitialTheme } from '@/utils/get-initial-theme';

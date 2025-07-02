@@ -8,7 +8,7 @@ interface HeroImageProps {
 
 function HeroImage({ image, blurDataURL, alt }: HeroImageProps) {
   return (
-    <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl">
+    <div className="fade-up fade-up-delay-4 relative aspect-[16/9] w-full overflow-hidden rounded-2xl">
       <Image
         src={image}
         alt={alt || 'Post image'}

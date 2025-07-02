@@ -5,6 +5,7 @@ export function useNewsletterForm() {
   const [mail, setMail] = useState('');
   const [variant, setVariant] = useState<InputVariant>('default');
   const [helper, setHelper] = useState('');
+  const [isEmpty, setIsEmpty] = useState(true);
 
   const handleMailSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -14,7 +15,15 @@ export function useNewsletterForm() {
 
     const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-    if (!isValid) {
+    if (!mail) {
+      setIsEmpty(true);
+      setHelper('');
+      return;
+    } else {
+      setIsEmpty(false);
+    }
+
+    if (!isValid && mail) {
       setVariant('error');
       setHelper('Lütfen geçerli bir e-posta adresi girin');
       return;
@@ -25,12 +34,14 @@ export function useNewsletterForm() {
     setHelper('Tebrikler, bültenimize abone oldunuz!');
     setMail('');
     e.currentTarget.reset();
+    setIsEmpty(true);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMail(e.target.value);
     setVariant('default');
     setHelper('');
+    setIsEmpty(e.target.value.trim() === '');
   };
 
   return {
@@ -38,6 +49,7 @@ export function useNewsletterForm() {
     variant,
     helper,
     handleMailSubmit,
-    handleChange
+    handleChange,
+    isEmpty
   };
 }

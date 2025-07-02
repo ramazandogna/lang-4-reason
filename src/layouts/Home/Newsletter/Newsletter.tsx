@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/Button';
 import { useNewsletterForm } from '@/hooks/useNewsletterForm';
 
 function Newsletter() {
-  const { mail, variant, helper, handleMailSubmit, handleChange } =
+  const { mail, variant, helper, handleMailSubmit, handleChange, isEmpty } =
     useNewsletterForm();
 
   return (
@@ -38,6 +38,7 @@ function Newsletter() {
             color="primary"
             className="text-md whitespace-nowrap! max-md:w-full"
             type="submit"
+            disabled={isEmpty}
           >
             Abone ol
           </Button>

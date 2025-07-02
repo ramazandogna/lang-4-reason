@@ -1,9 +1,23 @@
 import { notFound } from 'next/navigation';
-import PostDetail from '@/layouts/PostDetail';
+import { Suspense } from 'react';
+import dynamic from 'next/dynamic';
 import { getSinglePost } from '@/data/getSinglePost';
 import { getPostSlugs } from '@/data/getPostSlugs';
 import { generateMetadata as generateSEOMetadata } from '@/utils/seo';
 import type { Metadata } from 'next';
+import { Section } from '@/components/ui/Section';
+import { Hero } from '@/layouts/PostDetail/Hero';
+import { Content } from '@/layouts/PostDetail/Content';
+import StructuredData from '@/components/structuredData';
+
+// Lazy load edilecek bileşenler - sadece gerekli olanlar görünür olduktan sonra yüklenecek
+const LatestContent = dynamic(
+  () => import('../../layouts/PostDetail/Content/LatestContent/LatestContent')
+);
+
+const Newsletter = dynamic(
+  () => import('../../layouts/Home/Newsletter/Newsletter')
+);
 
 export async function generateStaticParams() {
   const slugs = await getPostSlugs();
@@ -11,7 +25,7 @@ export async function generateStaticParams() {
 }
 
 export const dynamicParams = false;
-export const revalidate = 60;
+export const revalidate = 3600; // 1 saat - daha uzun cache süresi
 
 export async function generateMetadata(props: {
   params: Promise<{ slug: string }>;
@@ -46,10 +60,67 @@ export default async function PostPage(props: {
   params: Promise<{ slug: string }>;
 }) {
   const params = await props.params;
-  const post = await getSinglePost(params.slug);
-  const slugs = await getPostSlugs(params.slug);
+
+  // Paralel data fetching - hem post hem de slugs aynı anda çekilsin
+  const [post, slugs] = await Promise.all([
+    getSinglePost(params.slug),
+    getPostSlugs(params.slug)
+  ]);
+
   const isValidSlug = slugs?.some((s) => params.slug === s.slug);
   if (!isValidSlug || !post) notFound();
 
-  return <PostDetail post={post} />;
+  return (
+    <>
+      <StructuredData
+        title={post.title}
+        description={
+          post.excerpt ? post.excerpt.replace(/^<p>|<\/p>\n$/g, '').trim() : ''
+        }
+        image={post.featuredImage?.node?.mediaDetails?.sizes?.[0]?.sourceUrl}
+        url={`https://amacinaingilize.com/${post.slug}`}
+        type="Article"
+        publishedTime={post.date}
+        modifiedTime={post.modified}
+        author={post.author.node.name}
+      />
+      {/* Critical CSS ve Core Web Vitals için öncelikli içerik */}
+      <Section className="container mx-auto pt-24 pb-0 max-md:pt-16 max-md:pb-10 md:pb-16!">
+        <Hero hero={post} />
+      </Section>
+
+      <Section className="container mx-auto my-0! py-0! md:my-0! md:py-0!">
+        <div className="post-container mx-auto">
+          <Content post={post} />
+        </div>
+      </Section>
+
+      {/* Below-the-fold content - lazy loading ile */}
+      <Suspense
+        fallback={
+          <Section className="container mx-auto">
+            <div className="h-64 animate-pulse rounded bg-gray-200" />
+          </Section>
+        }
+      >
+        <Section className="container mx-auto">
+          <LatestContent />
+        </Section>
+      </Suspense>
+
+      <Suspense
+        fallback={
+          <Section className="mx-auto w-full bg-[var(--secondary-bg)]/30 py-16">
+            <div className="container h-32 animate-pulse rounded bg-gray-200" />
+          </Section>
+        }
+      >
+        <Section className="mx-auto w-full bg-[var(--secondary-bg)]/30 py-16">
+          <span className="container">
+            <Newsletter />
+          </span>
+        </Section>
+      </Suspense>
+    </>
+  );
 }
