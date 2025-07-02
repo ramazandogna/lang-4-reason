@@ -1,8 +1,16 @@
 'use client';
+
+// UI Components
 import { Button } from '@/components/ui/Button';
-import { Copy, Facebook, Linkedin, Twitter } from 'lucide-react';
-import Image from 'next/image';
 import Link from '@/components/ui/Link';
+
+// Icons
+import { Copy, Facebook, Linkedin, Twitter } from 'lucide-react';
+
+// Next.js Components
+import Image from 'next/image';
+
+// Types
 import { AuthorNode } from '@/types/post';
 
 type ContentAuthorType = {
@@ -14,7 +22,7 @@ export default function ContentAuthor({
   contentAuthor,
   contentSlug
 }: ContentAuthorType) {
-  // Oluşturulacak paylaşım URL’si
+  // Oluşturulacak paylaşım URL'si
   const postUrl = `${typeof window !== 'undefined' ? window.location.origin : ''}/${contentSlug}`;
 
   const handleCopy = () => {

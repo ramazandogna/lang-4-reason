@@ -1,3 +1,4 @@
+// UI Components
 import Link from '@/components/ui/Link';
 
 export default function NotFound() {

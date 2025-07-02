@@ -1,7 +1,14 @@
+// Next.js core
 import NextLink from 'next/link';
+
+// Utils
 import { cn } from '@/utils/cn';
+
+// Types & Constants
 import type { LinkProps } from './Link.types';
 import { LINK_VARIANTS } from './Link.constants';
+
+// Styles
 import './Link.css';
 
 export default function Link({

@@ -15,7 +15,7 @@ type ResponsiveContextType = {
   isTablet: boolean;
   isDesktop: boolean;
   breakpoint: 'mobile' | 'tablet' | 'desktop';
-  isClient: boolean; // 👈 yeni eklendi
+  isClient: boolean; // newly added
 };
 
 const ResponsiveContext = createContext<ResponsiveContextType | undefined>(

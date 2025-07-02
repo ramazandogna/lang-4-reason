@@ -1,4 +1,7 @@
-import { Metadata } from 'next';
+// Next.js core
+import type { Metadata } from 'next';
+
+// Data (mock, should be replaced with real data in production)
 import { mockPosts } from '@/mocks/mockPosts';
 
 type Props = {

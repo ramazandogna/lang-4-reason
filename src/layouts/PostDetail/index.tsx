@@ -1,8 +1,13 @@
+// Layouts
 import { Hero } from './Hero';
 import { Content } from './Content';
 import { LatestContent } from './Content/LatestContent';
 import { Newsletter } from '../Home/Newsletter';
+
+// Types
 import { PostType } from '@/types/post';
+
+// UI Components
 import { Section } from '@/components/ui/Section';
 
 export default function PostDetail({ post }: { post: PostType }) {

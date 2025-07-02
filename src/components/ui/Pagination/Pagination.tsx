@@ -1,11 +1,21 @@
+// React & Next core imports
 'use client';
 
+// UI Components
+import { Button } from '@/components/ui/Button';
+
+// Icons
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+
+// Utils
 import { cn } from '@/utils/cn';
+
+// Context
+import { useResponsive } from '@/context/ResponsiveContext';
+
+// Constants & Types
 import { PAGINATION_LABELS, PAGINATION_DEFAULTS } from './Pagination.constants';
 import type { PaginationProps, PageItem } from './Pagination.types';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { Button } from '@/components/ui/Button';
-import { useResponsive } from '@/context/ResponsiveContext';
 
 export default function Pagination({
   currentPage,
@@ -14,7 +24,7 @@ export default function Pagination({
   totalResults,
   onPageChange,
 
-  /** Masaüstü için geçerli */
+  /** Desktop only configuration */
   align = PAGINATION_DEFAULTS.align,
   showPrevNextText = PAGINATION_DEFAULTS.showPrevNextText,
   showPages = PAGINATION_DEFAULTS.showPages,
@@ -22,14 +32,17 @@ export default function Pagination({
 
   className = ''
 }: PaginationProps) {
+  // Hooks
   const { width, isClient } = useResponsive();
 
+  // SSR protection
   if (!isClient) return null;
 
-  // --- MOBİL LAYOUT ---
+  // Mobile Layout - Simplified pagination for small screens
   if (width < 640) {
     return (
       <div className="flex w-full items-center justify-center gap-4 py-2">
+        {/* Previous Button */}
         <Button
           size="sm"
           variant="primary"
@@ -40,6 +53,8 @@ export default function Pagination({
           iconOnly
           className="text-sm font-semibold transition-all duration-300 hover:text-[var(--accent)] disabled:opacity-50"
         />
+
+        {/* Page Indicator */}
         <span className="text-md group font-semibold">
           Sayfa{' '}
           <span className="transition-all duration-300 group-hover:text-[var(--accent)]!">
@@ -50,6 +65,8 @@ export default function Pagination({
             {totalPages}
           </span>
         </span>
+
+        {/* Next Button */}
         <Button
           size="sm"
           variant="primary"
@@ -64,8 +81,9 @@ export default function Pagination({
     );
   }
 
-  // --- MASAÜSTÜ LAYOUT ---
-  // sayfa dizisi oluştur
+  // Desktop Layout - Full pagination with page numbers
+
+  // Create page array with ellipsis logic
   const pages: PageItem[] = [];
   for (let i = 1; i <= totalPages; i++) {
     if (i <= 4 || i === currentPage || i > totalPages - 2) {
@@ -75,6 +93,7 @@ export default function Pagination({
     }
   }
 
+  // Calculate display values
   const endItem = Math.min(currentPage * pageSize, totalResults);
   const justifyClass = align === 'start' ? 'justify-start' : 'justify-center';
 
@@ -82,12 +101,12 @@ export default function Pagination({
     <div
       className={cn(
         'flex w-full items-center gap-4 text-gray-600',
-        'group', // group-hover için
+        'group', // for group-hover effects
         justifyClass,
         className
       )}
     >
-      {/* Önceki */}
+      {/* Previous Button */}
       <Button
         size="sm"
         variant="primary"
@@ -100,7 +119,7 @@ export default function Pagination({
         {showPrevNextText ? PAGINATION_LABELS.prev : null}
       </Button>
 
-      {/* Sayfa numaraları */}
+      {/* Page Numbers */}
       {showPages &&
         pages.map((p, idx) =>
           p === 'ellipsis' ? (
@@ -129,7 +148,7 @@ export default function Pagination({
           )
         )}
 
-      {/* Sonraki */}
+      {/* Next Button */}
       <Button
         size="sm"
         variant="primary"
@@ -142,7 +161,7 @@ export default function Pagination({
         {showPrevNextText ? PAGINATION_LABELS.next : null}
       </Button>
 
-      {/* Showing metni */}
+      {/* Results Summary */}
       {showResults && (
         <span
           className={cn(

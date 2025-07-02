@@ -1,9 +1,13 @@
 'use client';
+
+// UI Components
 import Link from '@/components/ui/Link';
-import { Button } from '../ui/Button';
-import { Input } from '../ui/Input';
-import { Section } from '../ui/Section';
+import { Button } from '@/components/ui/Button';
+import { Input } from '@/components/ui/Input';
+import { Section } from '@/components/ui/Section';
 import { Mail } from 'lucide-react';
+
+// Hooks
 import { useNewsletterForm } from '@/hooks/useNewsletterForm';
 
 function Footer() {
@@ -15,7 +19,7 @@ function Footer() {
       <span className="container mx-auto flex w-full flex-col gap-16 max-md:gap-12">
         <div className="flex w-full justify-between gap-4 max-md:flex-col">
           <div className="flex flex-col gap-3">
-            <h4 className="font-extrabold">Bületinimize Katıl</h4>
+            <h4 className="font-extrabold">Bültenimize Katıl</h4>
             <p className="text-xl font-light">
               Only updates and special offers. No spams.
             </p>

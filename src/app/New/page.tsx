@@ -1,3 +1,4 @@
+// Page component for /new
 export default function NewPage() {
   return (
     <div className="container mx-auto">

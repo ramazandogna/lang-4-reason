@@ -1,22 +1,30 @@
+// Next.js & React core
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 import dynamic from 'next/dynamic';
+import type { Metadata } from 'next';
+
+// Data/API
 import { getSinglePost } from '@/data/getSinglePost';
 import { getPostSlugs } from '@/data/getPostSlugs';
+
+// SEO & Utils
 import { generateMetadata as generateSEOMetadata } from '@/utils/seo';
-import type { Metadata } from 'next';
+
+// UI Components
 import { Section } from '@/components/ui/Section';
-import { Hero } from '@/layouts/PostDetail/Hero';
-import { Content } from '@/layouts/PostDetail/Content';
 import StructuredData from '@/components/structuredData';
 
-// Lazy load edilecek bileşenler - sadece gerekli olanlar görünür olduktan sonra yüklenecek
-const LatestContent = dynamic(
-  () => import('../../layouts/PostDetail/Content/LatestContent/LatestContent')
-);
+// Layouts
+import { Hero } from '@/layouts/PostDetail/Hero';
+import { Content } from '@/layouts/PostDetail/Content';
 
+// Lazy loaded components (only loaded when visible)
+const LatestContent = dynamic(
+  () => import('@/layouts/PostDetail/Content/LatestContent/LatestContent')
+);
 const Newsletter = dynamic(
-  () => import('../../layouts/Home/Newsletter/Newsletter')
+  () => import('@/layouts/Home/Newsletter/Newsletter')
 );
 
 export async function generateStaticParams() {
@@ -25,7 +33,7 @@ export async function generateStaticParams() {
 }
 
 export const dynamicParams = false;
-export const revalidate = 3600; // 1 saat - daha uzun cache süresi
+export const revalidate = 60; // 1 hour cache
 
 export async function generateMetadata(props: {
   params: Promise<{ slug: string }>;
@@ -61,7 +69,7 @@ export default async function PostPage(props: {
 }) {
   const params = await props.params;
 
-  // Paralel data fetching - hem post hem de slugs aynı anda çekilsin
+  // Parallel data fetching
   const [post, slugs] = await Promise.all([
     getSinglePost(params.slug),
     getPostSlugs(params.slug)
@@ -84,7 +92,7 @@ export default async function PostPage(props: {
         modifiedTime={post.modified}
         author={post.author.node.name}
       />
-      {/* Critical CSS ve Core Web Vitals için öncelikli içerik */}
+      {/* Critical content - loads immediately */}
       <Section className="container mx-auto pt-24 pb-0 max-md:pt-16 max-md:pb-10 md:pb-16!">
         <Hero hero={post} />
       </Section>
@@ -95,7 +103,7 @@ export default async function PostPage(props: {
         </div>
       </Section>
 
-      {/* Below-the-fold content - lazy loading ile */}
+      {/* Below-the-fold content - lazy loaded */}
       <Suspense
         fallback={
           <Section className="container mx-auto">

@@ -1,5 +1,10 @@
+// UI Components
 import { Badge } from '@/components/ui/Badge';
+
+// Types
 import { PostType } from '@/types/post';
+
+// Next.js Components
 import Link from 'next/link';
 
 function HeroTitle({ hero }: { hero: PostType }) {

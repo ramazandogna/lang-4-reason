@@ -1,5 +1,7 @@
+// SEO Utils
 import { generateStructuredData } from '@/utils/seo';
 
+// Types
 interface StructuredDataProps {
   title?: string;
   description?: string;

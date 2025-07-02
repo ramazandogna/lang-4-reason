@@ -7,7 +7,7 @@ import PostsPagination from './PostsPagination/PostsPagination';
 import { generateNavItems } from '@/components/ui/Navbar';
 import type { PostResponse } from '@/types/posts';
 
-function Posts({ posts }: { posts: PostResponse }) {
+export default function Posts({ posts }: { posts: PostResponse }) {
   const [activeKey, setActiveKey] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 6;
@@ -67,5 +67,3 @@ function Posts({ posts }: { posts: PostResponse }) {
     </span>
   );
 }
-
-export default Posts;

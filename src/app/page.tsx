@@ -1,58 +1,63 @@
+// React & Next core imports
 import { Suspense } from 'react';
 import dynamic from 'next/dynamic';
 import type { Metadata } from 'next';
+
+// UI Components
 import { Section } from '@/components/ui/Section';
-import getAllPosts from '@/data/getAllPosts';
-import { LatestPosts } from '@/layouts/Home/LatestPosts';
 import StructuredData from '@/components/structuredData';
+
+// Layouts
+import { LatestPosts } from '@/layouts/Home/LatestPosts';
+
+// Data/API
+import getAllPosts from '@/data/getAllPosts';
+
+// SEO & Utils
 import { generateMetadata as generateSEOMetadata } from '@/utils/seo';
+import { SITE, SEO } from '@/constant';
 
-// Lazy load edilecek bileşenler - sadece gerekli olanlar görünür olduktan sonra yüklenecek
-const Posts = dynamic(() => import('../layouts/Home/Posts/Posts'));
-
+// Lazy loaded components (only loaded when visible)
+const Posts = dynamic(() => import('@/layouts/Home/Posts/Posts'));
 const Newsletter = dynamic(
-  () => import('../layouts/Home/Newsletter/Newsletter')
+  () => import('@/layouts/Home/Newsletter/Newsletter')
 );
 
-// Cache süresi ve revalidation
-export const revalidate = 3600; // 1 saat cache
+// Revalidation config
+export const revalidate = 60; // 1 hour cache
+export const dynamicParams = false;
 
 // SEO Metadata
 export async function generateMetadata(): Promise<Metadata> {
-  const title = 'Amacına İngilizce - İngilizce Öğrenme Kaynakları';
-  const description =
-    'İngilizce öğrenmek için en güncel kaynaklara ulaşın. Pratik yöntemler, dil bilgisi ipuçları ve etkili öğrenme stratejileri ile İngilizce seviyenizi geliştirin.';
-  const image = '/og-image.jpg'; // Ana sayfa için özel OG image
-
   return generateSEOMetadata({
-    title,
-    description,
-    image,
-    url: 'https://amacinaingilize.com',
+    title: SEO.DEFAULT_TITLE,
+    description: SEO.DEFAULT_DESCRIPTION,
+    image: SEO.DEFAULT_IMAGE,
+    url: SITE.URL,
     type: 'website'
   });
 }
 
 export default async function HomePage() {
-  // Posts verisi - server-side'da fetch edilir
+  // Fetch posts server-side
   const posts = await getAllPosts('', null, 100);
 
   return (
     <>
       <StructuredData
-        title="Amacına İngilizce - İngilizce Öğrenme Kaynakları"
-        description="İngilizce öğrenmek için en güncel kaynaklara ulaşın. Pratik yöntemler, dil bilgisi ipuçları ve etkili öğrenme stratejileri ile İngilizce seviyenizi geliştirin."
-        image="/og-image.jpg"
-        url="https://amacinaingilize.com"
+        title={SEO.DEFAULT_TITLE}
+        description={SEO.DEFAULT_DESCRIPTION}
+        image={SEO.DEFAULT_IMAGE}
+        url={SITE.URL}
         type="WebSite"
       />
 
-      {/* Critical content - hemen yüklenir */}
+      {/* Critical content - loads immediately */}
       <Section className="container mx-auto w-full pt-16 max-md:pt-8">
         <LatestPosts posts={posts} />
       </Section>
 
-      {/* Below-the-fold content - lazy loading ile */}
+      {/* Below-the-fold content - lazy loaded */}
       <Suspense
         fallback={
           <Section className="container mx-auto w-full md:pt-0!">

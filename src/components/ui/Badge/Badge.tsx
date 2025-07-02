@@ -1,6 +1,9 @@
+// UI Constants
 import { BADGE_COLOR, BADGE_SIZE, BADGE_SHAPE } from './Badge.constants';
 import { BadgeProps } from './Badge.types';
-import { cn } from '@/utils/cn'; // Kendi util'in
+
+// Utils
+import { cn } from '@/utils/cn';
 
 export default function Badge({
   color = 'gray',
@@ -29,7 +32,7 @@ export default function Badge({
       {leftIcon && <span className="mr-1 flex items-center">{leftIcon}</span>}
       {children && shape !== 'circle' && <span>{children}</span>}
       {rightIcon && <span className="ml-1 flex items-center">{rightIcon}</span>}
-      {/* Eğer badge tamamen icon/counter ise: */}
+      {/* If badge is only icon/counter: */}
       {!children && shape === 'circle' && leftIcon}
     </span>
   );

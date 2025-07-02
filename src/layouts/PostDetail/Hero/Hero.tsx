@@ -1,5 +1,8 @@
+// Layouts
 import HeroTitle from './HeroTitle/HeroTitle';
 import HeroImage from './HeroImage/HeroImage';
+
+// Types
 import { PostType } from '@/types/post';
 
 export default function Hero({

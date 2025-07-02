@@ -1,5 +1,7 @@
+// Next.js Components
 import Image from 'next/image';
 
+// Types
 interface HeroImageProps {
   image: string;
   blurDataURL?: string;

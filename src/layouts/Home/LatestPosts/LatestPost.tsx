@@ -1,6 +1,11 @@
+// React core
 import React from 'react';
+
+// Layouts
 import { LatestPostsTitle } from './LatestPostsTitle';
 import { LatestPostsCards } from './LatestPostsCards';
+
+// Types
 import { PostResponse } from '@/types/posts';
 
 export default function LatestPosts({ posts }: { posts: PostResponse }) {

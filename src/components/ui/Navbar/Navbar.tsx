@@ -1,5 +1,10 @@
-import { Button } from '../Button';
-import { NavbarProps } from './Navbar.types';
+// UI Components
+import { Button } from '@/components/ui/Button';
+
+// Types
+import type { NavbarProps } from './Navbar.types';
+
+// Utils
 import { cn } from '@/utils/cn';
 
 export default function Navbar({
@@ -31,13 +36,13 @@ export default function Navbar({
             )}
           >
             <span className="text-[var(--accent)]">{item.label}</span>
-            {/* Sadece seçili tabda badge görünür */}
+            {/* Show badge only on selected tab */}
             {isActive && item.count !== undefined && (
               <span className="ml-2 rounded-full bg-[var(--accent)]/10 px-3 py-0.5 text-base font-bold text-[var(--text)]">
                 {item.count}
               </span>
             )}
-            {/* Alttaki çizgi */}
+            {/* Underline */}
             <span
               className={cn(
                 'absolute -bottom-[1.5px] left-0 z-[10] h-[1.5px] w-full rounded-full transition-all duration-200',

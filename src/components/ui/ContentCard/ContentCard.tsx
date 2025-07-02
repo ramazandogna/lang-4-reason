@@ -1,7 +1,12 @@
+// Next.js & React core
 import Image from 'next/image';
+
+// UI Components
 import { ArrowUpRight } from 'lucide-react';
-import { Button } from '../Button';
+import { Button } from '@/components/ui/Button';
 import Link from '@/components/ui/Link';
+
+// Types
 import type { PostNode } from '@/types/posts';
 
 export type ContentCardProps = {

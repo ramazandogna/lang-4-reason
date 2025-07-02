@@ -1,5 +1,7 @@
+// UI Components
 import { ContentCard } from '@/components/ui/ContentCard';
-import React from 'react';
+
+// Types
 import { PostNode, PostResponse } from '@/types/posts';
 
 function PostsCards({ posts }: { posts: PostResponse }) {

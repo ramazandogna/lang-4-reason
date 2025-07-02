@@ -1,6 +1,8 @@
-import React from 'react';
+// UI Components
 import { Navbar } from '@/components/ui/Navbar';
 import { Input } from '@/components/ui/Input';
+
+// Icons
 import { Search } from 'lucide-react';
 
 type Props = {

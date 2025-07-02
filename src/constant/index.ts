@@ -1,16 +1,16 @@
-// Okuma hızı sabitleri
+// Reading speed constants
 export const READING_SPEED = {
   WORDS_PER_MINUTE: 200
 } as const;
 
-// API sabitleri
+// API constants
 export const API = {
   DEBOUNCE_DELAY: 300, // ms
   DEFAULT_POSTS_PER_PAGE: 5,
   MAX_POSTS_PER_PAGE: 10
 } as const;
 
-// Site sabitleri
+// Site-wide constants
 export const SITE = {
   NAME: 'Amacına İngilizce',
   URL: 'https://amacinaingilize.com',
@@ -22,7 +22,7 @@ export const SITE = {
   //TWITTER_HANDLE: '@pekafilli'
 } as const;
 
-// SEO sabitleri
+// SEO meta defaults
 export const SEO = {
   DEFAULT_TITLE: 'Amacına İngilizce - Ana Sayfa',
   DEFAULT_DESCRIPTION:
@@ -34,7 +34,7 @@ export const SEO = {
   // FACEBOOK_APP_ID: 'your-facebook-app-id'
 } as const;
 
-// Kategori sabitleri
+// Category slugs
 export const CATEGORIES = {
   ACTIVITIES: 'activities',
   PHOTOGRAPHY: 'photography',
@@ -43,7 +43,7 @@ export const CATEGORIES = {
   DESTINATIONS: 'destinations'
 } as const;
 
-// Sosyal medya linkleri
+// Social media links
 export const SOCIAL_LINKS = {
   INSTAGRAM: '/',
   TWITTER: '/',

@@ -1,5 +1,8 @@
-// app/popular/page.tsx
+// Page component for /popular
+// Next.js & React core
 import Image from 'next/image';
+
+// Utils
 import { getBlurDataURL } from '@/utils/plaiceholder';
 import { getImageSrc } from '@/utils/imageUtilis';
 

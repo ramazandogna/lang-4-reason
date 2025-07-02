@@ -1,8 +1,15 @@
-import { Section } from '@/components/ui/Section';
+// React core
 import React from 'react';
+
+// UI Components
+import { Section } from '@/components/ui/Section';
+
+// Layouts
 import { LatestPosts } from './LatestPosts';
 import { Posts } from './Posts';
 import { Newsletter } from './Newsletter';
+
+// Types
 import { PostResponse } from '@/types/posts';
 
 function Home({ posts }: { posts: PostResponse }) {

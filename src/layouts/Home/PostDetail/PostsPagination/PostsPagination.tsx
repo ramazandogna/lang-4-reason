@@ -1,5 +1,6 @@
 'use client';
 
+// UI Components
 import { Pagination } from '@/components/ui/Pagination';
 
 type Props = {

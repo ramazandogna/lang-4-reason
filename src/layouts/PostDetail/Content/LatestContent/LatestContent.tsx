@@ -1,4 +1,7 @@
+// Data/API
 import getAllPosts from '@/data/getAllPosts';
+
+// Layouts
 import { LatestPosts } from '@/layouts/Home/LatestPosts';
 
 export default async function LatestContent() {

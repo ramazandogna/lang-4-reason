@@ -1,4 +1,7 @@
+// Utils
 import { cn } from '@/utils/cn';
+
+// UI Constants
 import {
   BUTTON_SIZE,
   BUTTON_COLOR,
@@ -45,13 +48,13 @@ export default function Button({
       disabled={disabled}
       {...props}
     >
-      {/* İÇERİK WRAPPER - gap-2 ile sabit boşluk, justify ile hizalama */}
+      {/* CONTENT WRAPPER - gap-2 for spacing, justify for alignment */}
       <span className={cn('flex w-full items-center', justify, 'gap-2')}>
-        {/* Sol ikon varsa */}
+        {/* Left icon if present */}
         {leftIcon && <span className="flex items-center">{leftIcon}</span>}
-        {/* Sadece ikon değilse children'ı göster */}
+        {/* Show children if not icon only */}
         {!isIconOnly && <span>{children}</span>}
-        {/* Sağ ikon varsa */}
+        {/* Right icon if present */}
         {rightIcon && <span className="flex items-center">{rightIcon}</span>}
       </span>
     </button>

@@ -1,12 +1,21 @@
+// Global styles
 import '../styles/globals.css';
 import '../styles/animates.css';
+
+// Next.js & React core
 import type { Metadata } from 'next';
 import { Plus_Jakarta_Sans } from 'next/font/google';
+
+// Utils
 import { getInitialTheme } from '@/utils/get-initial-theme';
+
+// Providers
 import { ThemeProvider } from './theme-provider';
+import { ResponsiveProvider } from '@/context/ResponsiveContext';
+
+// UI Components
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
-import { ResponsiveProvider } from '@/context/ResponsiveContext';
 
 const plusJakarta = Plus_Jakarta_Sans({
   variable: '--font-plus-jakarta',

@@ -1,3 +1,4 @@
+// Page component for /reading-list
 export default function ReadingListPage() {
   return (
     <div className="container mx-auto">

@@ -1,4 +1,7 @@
+// UI Components
 import { ContentCard } from '@/components/ui/ContentCard';
+
+// Types
 import { PostNode, PostResponse } from '@/types/posts';
 
 function LatestPostsCards({ posts }: { posts: PostResponse }) {

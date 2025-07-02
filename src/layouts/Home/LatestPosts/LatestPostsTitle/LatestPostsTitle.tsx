@@ -1,7 +1,9 @@
+// UI Components
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
+
+// Icons
 import { ArrowRight } from 'lucide-react';
-import React from 'react';
 
 function LatestPostsTitle() {
   return (

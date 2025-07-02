@@ -1,4 +1,7 @@
+// Types
 import { PostType } from '@/types/post';
+
+// Layouts
 import { ContentAuthor } from './ContentAuthor';
 
 export default function Content({ post }: { post: PostType }) {
