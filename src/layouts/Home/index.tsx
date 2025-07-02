@@ -2,7 +2,7 @@
 import React from 'react';
 
 // UI Components
-import { Section } from '@/components/ui/Section';
+import { Section } from '@/components/Section';
 
 // Layouts
 import { LatestPosts } from './LatestPosts';

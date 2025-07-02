@@ -1,10 +1,10 @@
 'use client';
 
 // UI Components
-import Link from '@/components/ui/Link';
-import { Button } from '@/components/ui/Button';
-import { Input } from '@/components/ui/Input';
-import { Section } from '@/components/ui/Section';
+import Link from '@/components/Link';
+import { Button } from '@/components/Button';
+import { Input } from '@/components/Input';
+import { Section } from '@/components/Section';
 import { Mail } from 'lucide-react';
 
 // Hooks

@@ -1,5 +1,5 @@
 // UI Components
-import Link from '@/components/ui/Link';
+import Link from '@/components/Link';
 
 export default function NotFound() {
   return (

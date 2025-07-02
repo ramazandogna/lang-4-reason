@@ -3,8 +3,8 @@ import Image from 'next/image';
 
 // UI Components
 import { ArrowUpRight } from 'lucide-react';
-import { Button } from '@/components/ui/Button';
-import Link from '@/components/ui/Link';
+import { Button } from '@/components/Button';
+import Link from '@/components/Link';
 
 // Types
 import type { PostNode } from '@/types/posts';

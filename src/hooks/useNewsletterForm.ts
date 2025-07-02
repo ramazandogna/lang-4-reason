@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { InputVariant } from '@/components/ui/Input';
+import type { InputVariant } from '@/components/Input';
 
 export function useNewsletterForm() {
   const [mail, setMail] = useState('');

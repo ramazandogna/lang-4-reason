@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import type { Metadata } from 'next';
 
 // UI Components
-import { Section } from '@/components/ui/Section';
+import { Section } from '@/components/Section';
 import StructuredData from '@/components/structuredData';
 
 // Layouts

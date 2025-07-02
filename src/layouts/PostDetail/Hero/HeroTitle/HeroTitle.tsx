@@ -1,5 +1,5 @@
 // UI Components
-import { Badge } from '@/components/ui/Badge';
+import { Badge } from '@/components/Badge';
 
 // Types
 import { PostType } from '@/types/post';

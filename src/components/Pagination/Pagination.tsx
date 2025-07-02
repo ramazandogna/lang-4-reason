@@ -2,7 +2,7 @@
 'use client';
 
 // UI Components
-import { Button } from '@/components/ui/Button';
+import { Button } from '@/components/Button';
 
 // Icons
 import { ChevronLeft, ChevronRight } from 'lucide-react';

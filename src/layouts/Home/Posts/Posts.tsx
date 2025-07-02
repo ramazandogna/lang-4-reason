@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { PostsCards } from '../PostDetail/PostsCards';
 import { PostsHeader } from '../PostDetail/PostsHeader';
 import PostsPagination from '../PostDetail/PostsPagination/PostsPagination';
-import { generateNavItems } from '@/components/ui/Navbar/Navbar.constants';
+import { generateNavItems } from '@/components/Navbar/Navbar.constants';
 import type { PostResponse } from '@/types/posts';
 
 export default function Posts({ posts }: { posts: PostResponse }) {
@@ -49,10 +49,7 @@ export default function Posts({ posts }: { posts: PostResponse }) {
   }
 
   return (
-    <span
-      id="posts-section"
-      className="flex flex-col gap-[64px] pt-4 max-md:gap-[40px]"
-    >
+    <span className="flex flex-col gap-[64px] pt-4 max-md:gap-[40px]">
       <PostsHeader
         activeKey={activeKey}
         setActiveKey={(key) => {

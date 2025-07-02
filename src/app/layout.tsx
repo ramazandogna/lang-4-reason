@@ -8,6 +8,7 @@ import { Plus_Jakarta_Sans } from 'next/font/google';
 
 // Utils
 import { getInitialTheme } from '@/utils/get-initial-theme';
+import { generateMetadata } from '@/utils/seo';
 
 // Providers
 import { ThemeProvider } from './theme-provider';
@@ -16,6 +17,7 @@ import { ResponsiveProvider } from '@/context/ResponsiveContext';
 // UI Components
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
+import ErrorBoundary from '@/components/errorBoundary';
 
 const plusJakarta = Plus_Jakarta_Sans({
   variable: '--font-plus-jakarta',
@@ -25,8 +27,7 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'Lang for Reason',
-  description: 'Amacına uygun dil öğrenme platformu'
+  ...generateMetadata()
 };
 
 export default async function RootLayout({
@@ -47,7 +48,9 @@ export default async function RootLayout({
         <ThemeProvider defaultTheme={theme}>
           <ResponsiveProvider>
             <Header />
-            <main className="pt-20! pb-6">{children}</main>
+            <main className="pt-20! pb-6">
+              <ErrorBoundary>{children}</ErrorBoundary>
+            </main>
             <Footer />
           </ResponsiveProvider>
         </ThemeProvider>

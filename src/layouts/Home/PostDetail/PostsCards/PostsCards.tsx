@@ -1,5 +1,5 @@
 // UI Components
-import { ContentCard } from '@/components/ui/ContentCard';
+import { ContentCard } from '@/components/ContentCard';
 
 // Types
 import { PostNode, PostResponse } from '@/types/posts';

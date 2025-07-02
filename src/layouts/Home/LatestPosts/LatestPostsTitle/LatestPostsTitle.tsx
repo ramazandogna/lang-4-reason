@@ -1,9 +1,10 @@
 // UI Components
-import { Badge } from '@/components/ui/Badge';
-import { Button } from '@/components/ui/Button';
+import { Badge } from '@/components/Badge';
+import { Button } from '@/components/Button';
 
 // Icons
 import { ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
 function LatestPostsTitle() {
   return (
@@ -22,21 +23,23 @@ function LatestPostsTitle() {
             bibendum.
           </p>
         </span>
-        <Button
-          variant="primary"
-          color="theme"
-          size="lg"
-          align="center"
-          className="group ml-auto flex min-w-auto justify-center py-4! text-center font-bold whitespace-nowrap max-md:mt-4 max-md:w-full"
-          rightIcon={
-            <ArrowRight
-              size={16}
-              className="transition-transform group-hover:translate-x-1"
-            />
-          }
-        >
-          Tüm Paylaşımları Gör
-        </Button>
+        <Link href="/#posts-section">
+          <Button
+            variant="primary"
+            color="theme"
+            size="lg"
+            align="center"
+            className="group ml-auto flex min-w-auto justify-center py-4! text-center font-bold whitespace-nowrap max-md:mt-4 max-md:w-full"
+            rightIcon={
+              <ArrowRight
+                size={16}
+                className="transition-transform group-hover:translate-x-1"
+              />
+            }
+          >
+            Tüm Paylaşımları Gör
+          </Button>
+        </Link>
       </span>
     </div>
   );

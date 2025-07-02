@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { PostsCards } from './PostsCards';
 import { PostsHeader } from './PostsHeader';
 import PostsPagination from './PostsPagination/PostsPagination';
-import { generateNavItems } from '@/components/ui/Navbar';
+import { generateNavItems } from '@/components/Navbar';
 import type { PostResponse } from '@/types/posts';
 
 export default function Posts({ posts }: { posts: PostResponse }) {

@@ -1,8 +1,8 @@
 'use client';
 
 // UI Components
-import { Button } from '@/components/ui/Button';
-import Link from '@/components/ui/Link';
+import { Button } from '@/components/Button';
+import Link from '@/components/Link';
 
 // Icons
 import { Copy, Facebook, Linkedin, Twitter } from 'lucide-react';

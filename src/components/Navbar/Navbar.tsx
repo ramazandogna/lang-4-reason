@@ -1,5 +1,5 @@
 // UI Components
-import { Button } from '@/components/ui/Button';
+import { Button } from '@/components/Button';
 
 // Types
 import type { NavbarProps } from './Navbar.types';

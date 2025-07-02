@@ -12,7 +12,7 @@ import { getPostSlugs } from '@/data/getPostSlugs';
 import { generateMetadata as generateSEOMetadata } from '@/utils/seo';
 
 // UI Components
-import { Section } from '@/components/ui/Section';
+import { Section } from '@/components/Section';
 import StructuredData from '@/components/structuredData';
 
 // Layouts

@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 
 // UI Components
-import Link from '@/components/ui/Link';
-import { Button } from '@/components/ui/Button';
-import HamburgerIcon from '@/components/ui/HamburgerIcon';
+import Link from '@/components/Link';
+import { Button } from '@/components/Button';
+import HamburgerIcon from '@/components/HamburgerIcon';
 
 // Icons
 import { SunMoon } from 'lucide-react';

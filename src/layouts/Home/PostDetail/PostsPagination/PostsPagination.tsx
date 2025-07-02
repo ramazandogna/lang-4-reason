@@ -1,7 +1,7 @@
 'use client';
 
 // UI Components
-import { Pagination } from '@/components/ui/Pagination';
+import { Pagination } from '@/components/Pagination';
 
 type Props = {
   currentPage: number;

@@ -8,7 +8,7 @@ import { Newsletter } from '../Home/Newsletter';
 import { PostType } from '@/types/post';
 
 // UI Components
-import { Section } from '@/components/ui/Section';
+import { Section } from '@/components/Section';
 
 export default function PostDetail({ post }: { post: PostType }) {
   return (

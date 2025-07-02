@@ -1,6 +1,6 @@
 // UI Components
-import { Navbar } from '@/components/ui/Navbar';
-import { Input } from '@/components/ui/Input';
+import { Navbar } from '@/components/Navbar';
+import { Input } from '@/components/Input';
 
 // Icons
 import { Search } from 'lucide-react';
