@@ -1,7 +1,9 @@
+import { Section } from '@/components/ui/Section';
+
 export default function Loading() {
   return (
-    <div className="p-8 text-center">
+    <Section className="p-8 text-center">
       <p>Yükleniyor...</p>
-    </div>
+    </Section>
   );
 }
