@@ -12,10 +12,11 @@ export function formatTitle(title: string) {
 
 export function unFormatTitle(text: string) {
   const replacedText = text.replace(/-/g, ' ');
-  const capitalizedText = replacedText.charAt(0).toUpperCase() + replacedText.slice(1);
+  const capitalizedText =
+    replacedText.charAt(0).toUpperCase() + replacedText.slice(1);
   return capitalizedText;
 }
-export const formatDate = (date: any) => {
+export const formatDate = (date: Date) => {
   const year = date.getFullYear();
   const day = date.getDate();
   const month = date.getMonth() + 1;
