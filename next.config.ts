@@ -14,6 +14,11 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'wp.pekafilli.com',
         port: ''
+      },
+      {
+        protocol: 'https',
+        hostname: 'secure.gravatar.com',
+        port: ''
       }
     ]
   }

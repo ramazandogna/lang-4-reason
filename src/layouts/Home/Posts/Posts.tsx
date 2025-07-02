@@ -3,41 +3,51 @@
 import React, { useState } from 'react';
 import { PostsCards } from '../PostDetail/PostsCards';
 import { PostsHeader } from '../PostDetail/PostsHeader';
-
 import PostsPagination from '../PostDetail/PostsPagination/PostsPagination';
-import { generateNavItems } from '@/components/ui/Navbar';
-import { mockPosts } from '@/mocks/mockPosts';
+import { generateNavItems } from '@/components/ui/Navbar/Navbar.constants';
+import type { PostResponse } from '@/types/posts';
 
-function Posts() {
+export default function Posts({
+  initialPosts
+}: {
+  initialPosts: PostResponse;
+}) {
   const [activeKey, setActiveKey] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 6;
 
-  //  1. Filtrelenmiş veriyi al
+  console.log('Tüm post sayısı (SSR):', initialPosts.nodes.length);
+  // Tüm postlar üzerinden kategoriye göre filtrele
   const filteredPosts =
     activeKey === 'all'
-      ? mockPosts
-      : mockPosts.filter((post) => post.category === activeKey);
+      ? initialPosts.nodes
+      : initialPosts.nodes.filter((post) =>
+          post.categories?.nodes?.some((cat) => cat.name === activeKey)
+        );
+  console.log(
+    'Filtrelenmiş post sayısı:',
+    filteredPosts.length,
+    'Kategori:',
+    activeKey
+  );
 
   const totalResults = filteredPosts.length;
   const totalPages = Math.ceil(totalResults / pageSize);
 
-  //  2. Sayfaya göre postları böl
+  // Sayfaya göre postları böl
   const paginatedPosts = filteredPosts.slice(
     (currentPage - 1) * pageSize,
     currentPage * pageSize
   );
 
-  //  3. Navbar itemleri
-  const navItems = generateNavItems(activeKey);
+  // Navbar itemleri
+  const navItems = generateNavItems(initialPosts.nodes, activeKey);
 
   function scrollToPostsTop() {
     const el = document.getElementById('posts-section');
     if (!el) return;
-
     const yOffset = -80;
     const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
-
     window.scrollTo({ top: y, behavior: 'smooth' });
   }
 
@@ -50,11 +60,13 @@ function Posts() {
         activeKey={activeKey}
         setActiveKey={(key) => {
           setActiveKey(key);
-          setCurrentPage(1); // kategori değişince sayfa 1’e dön
+          setCurrentPage(1);
         }}
         navItems={navItems}
       />
-      <PostsCards posts={paginatedPosts} />
+      <PostsCards
+        posts={{ nodes: paginatedPosts, pageInfo: initialPosts.pageInfo }}
+      />
       <PostsPagination
         currentPage={currentPage}
         totalPages={totalPages}
@@ -68,5 +80,3 @@ function Posts() {
     </span>
   );
 }
-
-export default Posts;

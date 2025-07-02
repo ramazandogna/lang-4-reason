@@ -2,35 +2,33 @@ import Image from 'next/image';
 import { ArrowUpRight } from 'lucide-react';
 import { Button } from '../Button';
 import Link from '@/components/ui/Link';
-import { MockPost } from '@/types/Mock/Mock.types.ts';
-import { getImageSrc, getBlurData } from '@/utils/imageUtilis';
+import type { PostNode } from '@/types/posts';
 
-function ContentCard({
-  image,
-  avatar,
-  category,
-  title,
-  desc,
-  author,
-  readTime,
-  slug
-}: MockPost) {
-  const postImageSrc = getImageSrc(image);
-  const postBlurDataUrl = getBlurData(image);
-  const avatarBlurDataUrl = getBlurData(avatar);
+export type ContentCardProps = {
+  post: PostNode & { blurDataURL?: string };
+  readTime?: string;
+};
+
+export default function ContentCard({ post, readTime }: ContentCardProps) {
+  const postImageSrc =
+    post.featuredImage?.node?.mediaDetails?.sizes?.[0]?.sourceUrl || '';
+  const authorAvatarUrl = post.author?.node?.avatar?.url || '';
 
   return (
     <div className="flex flex-col overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm transition hover:shadow-lg">
       <div className="relative h-[220px] w-full overflow-hidden rounded-3xl">
-        <Link href={`/${slug}`} className="group inset-0 flex cursor-pointer">
+        <Link
+          href={`/${post.slug}`}
+          className="group inset-0 flex cursor-pointer"
+        >
           <Image
             src={postImageSrc}
-            alt={title}
+            alt={post.title}
             fill
             className="object-cover"
             sizes="(max-width: 600px) 100vw, 420px"
-            placeholder={postBlurDataUrl ? 'blur' : 'empty'}
-            blurDataURL={postBlurDataUrl}
+            placeholder={post.blurDataURL ? 'blur' : 'empty'}
+            blurDataURL={post.blurDataURL}
             loading="lazy"
           />
           <Button
@@ -47,36 +45,43 @@ function ContentCard({
 
       <div className="flex flex-col gap-2 p-6 pb-4">
         <span className="mb-2 text-xs font-bold text-indigo-600">
-          {category}
+          {post.categories?.nodes?.[0]?.name || ''}
         </span>
-        <Link href={`/${slug}`}>
+        <Link href={`/${post.slug}`}>
           <h2 className="mb-1 line-clamp-2 text-2xl font-extrabold text-gray-900">
-            {title}
+            {post.title}
           </h2>
         </Link>
         <p className="mb-3 line-clamp-2 text-base font-normal text-gray-500">
-          {desc}
+          {post.excerpt.replace(/<\/?p>/g, '')}
         </p>
 
         <div className="flex items-center justify-between pt-2">
           <div className="flex items-center gap-2">
-            <Image
-              src={avatar}
-              alt="Yazar"
-              width={40}
-              height={40}
-              placeholder="blur"
-              blurDataURL={avatarBlurDataUrl}
-              loading="lazy"
-              className="rounded-full border-2 border-white shadow-md"
-            />
-            <span className="text-sm font-bold text-gray-900">{author}</span>
+            <Link href={post.author?.node?.uri || '#'}>
+              <Image
+                src={authorAvatarUrl}
+                alt={post.author?.node?.name || ''}
+                width={40}
+                height={40}
+                placeholder="empty"
+                loading="lazy"
+                className="rounded-full border-2 border-white shadow-md"
+              />
+            </Link>
+            <Link href={post.author?.node?.uri || '#'}>
+              <span className="cursor-pointer text-sm font-bold text-gray-900 hover:underline">
+                {post.author?.node?.name || ''}
+              </span>
+            </Link>
           </div>
-          <span className="text-xs font-normal text-gray-400">{readTime}</span>
+          {readTime && (
+            <span className="text-xs font-normal text-gray-400">
+              {readTime}
+            </span>
+          )}
         </div>
       </div>
     </div>
   );
 }
-
-export default ContentCard;

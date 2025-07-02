@@ -3,15 +3,16 @@ import React from 'react';
 import { LatestPosts } from './LatestPosts';
 import { Posts } from './Posts';
 import { Newsletter } from './Newsletter';
+import { PostResponse } from '@/types/posts';
 
-function Home() {
+function Home({ posts }: { posts: PostResponse }) {
   return (
     <>
       <Section className="container mx-auto w-full pt-16! max-md:pt-8!">
-        <LatestPosts />
+        <LatestPosts posts={posts} />
       </Section>
       <Section className="container mx-auto w-full pt-0!">
-        <Posts />
+        <Posts initialPosts={posts} />
       </Section>
       <Section className="mx-auto w-full bg-[var(--secondary-bg)]/30 py-16!">
         <span className="container">

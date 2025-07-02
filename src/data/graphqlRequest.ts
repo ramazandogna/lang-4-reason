@@ -12,7 +12,6 @@ export default async function graphqlRequest(
 
   if (!url) throw new Error('GRAPHQL_URL tanımlı değil');
   try {
-    console.log('GRAPHQL_URL:', process.env.GRAPHQL_URL);
     const res = await fetch(url, {
       method: 'POST',
       headers,

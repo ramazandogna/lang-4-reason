@@ -1,22 +1,16 @@
+import getAllPosts from '@/data/getAllPosts';
+import Home from '@/layouts/Home';
 import { LatestPosts } from '@/layouts/Home/LatestPosts';
 import { Newsletter } from '@/layouts/Home/Newsletter';
 import { Posts } from '@/layouts/Home/Posts';
 import { Section } from 'lucide-react';
 
+const posts = await getAllPosts('', null, 100);
+
 export default function HomePage() {
   return (
     <>
-      <Section className="container mx-auto w-full pt-16! max-md:pt-8!">
-        <LatestPosts />
-      </Section>
-      <Section className="container mx-auto w-full pt-0!">
-        <Posts />
-      </Section>
-      <Section className="mx-auto w-full bg-[var(--secondary-bg)]/30 py-16!">
-        <span className="container">
-          <Newsletter />
-        </span>
-      </Section>
+      <Home posts={posts} />
     </>
   );
 }

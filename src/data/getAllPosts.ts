@@ -1,5 +1,23 @@
 import { PostResponse } from '../types/posts';
 import graphqlRequest from './graphqlRequest';
+import { getPlaiceholder } from 'plaiceholder';
+
+async function enrichPostWithBlur(post: any) {
+  const src =
+    post.featuredImage?.node?.mediaDetails?.sizes?.[0]?.sourceUrl || '';
+  let blurDataURL = undefined;
+  if (src) {
+    try {
+      const response = await fetch(src);
+      if (response.ok) {
+        const buffer = Buffer.from(await response.arrayBuffer());
+        const result = await getPlaiceholder(buffer);
+        blurDataURL = result.base64;
+      }
+    } catch {}
+  }
+  return { ...post, blurDataURL };
+}
 
 export default async function getAllPosts(
   endCursor = '',
@@ -31,6 +49,11 @@ export default async function getAllPosts(
           author {
             node {
               name
+              slug
+              uri
+              avatar {
+                url
+              }
             }
           }
           databaseId
@@ -99,5 +122,13 @@ export default async function getAllPosts(
     };
   }
 
-  return resJson.data.posts as PostResponse;
+  // Her post için blurDataURL ekle
+  const nodes = await Promise.all(
+    resJson.data.posts.nodes.map(enrichPostWithBlur)
+  );
+
+  return {
+    ...resJson.data.posts,
+    nodes
+  } as PostResponse;
 }

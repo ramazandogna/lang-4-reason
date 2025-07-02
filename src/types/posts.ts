@@ -36,6 +36,11 @@ export interface PostNode {
 
 export interface AuthorNode {
   name: string;
+  avatar?: {
+    url: string;
+  };
+  uri?: string;
+  slug?: string;
 }
 
 export interface Author {
