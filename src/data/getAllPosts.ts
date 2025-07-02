@@ -1,51 +1,5 @@
-import { PostNode, PostResponse } from '../types/posts';
+import { PostResponse } from '../types/posts';
 import graphqlRequest from './graphqlRequest';
-import { getPlaiceholder } from 'plaiceholder';
-
-async function enrichPostWithBlur(post: PostNode) {
-  const src =
-    post.featuredImage?.node?.mediaDetails?.sizes?.[0]?.sourceUrl || '';
-  let blurDataURL = undefined;
-  if (src) {
-    try {
-      const response = await fetch(src);
-      if (response.ok) {
-        const buffer = Buffer.from(await response.arrayBuffer());
-        const result = await getPlaiceholder(buffer);
-        blurDataURL = result.base64;
-      }
-    } catch {}
-  }
-
-  // Author avatar için de blur ekle
-  let authorAvatarBlur = undefined;
-  const avatarUrl = post.author?.node?.avatar?.url;
-  if (avatarUrl) {
-    try {
-      const response = await fetch(avatarUrl);
-      if (response.ok) {
-        const buffer = Buffer.from(await response.arrayBuffer());
-        const result = await getPlaiceholder(buffer);
-        authorAvatarBlur = result.base64;
-      }
-    } catch {}
-  }
-
-  return {
-    ...post,
-    blurDataURL,
-    author: {
-      ...post.author,
-      node: {
-        ...post.author?.node,
-        avatar: {
-          ...post.author?.node?.avatar,
-          blurDataURL: authorAvatarBlur
-        }
-      }
-    }
-  };
-}
 
 export default async function getAllPosts(
   endCursor = '',
@@ -150,13 +104,5 @@ export default async function getAllPosts(
     };
   }
 
-  // Her post için blurDataURL ekle
-  const nodes = await Promise.all(
-    resJson.data.posts.nodes.map(enrichPostWithBlur)
-  );
-
-  return {
-    ...resJson.data.posts,
-    nodes
-  } as PostResponse;
+  return resJson.data.posts as PostResponse;
 }

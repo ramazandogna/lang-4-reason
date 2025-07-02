@@ -1,21 +1,28 @@
 import { getPlaiceholder } from 'plaiceholder';
 import { Buffer } from 'buffer';
 
-export async function getBlurDataURL(src: string) {
-  let input: Buffer;
+const SUPPORTED_IMAGE_FORMATS = ['.jpg', '.jpeg', '.png', '.webp', '.avif'];
 
-  if (src.startsWith('http')) {
-    // remote URL ise fetch edip Buffer yap
-    const res = await fetch(src);
-    if (!res.ok) throw new Error(`Resim yüklenemedi: ${res.status}`);
-    const arrayBuffer = await res.arrayBuffer();
-    input = Buffer.from(arrayBuffer);
-  } else {
-    // yerel path ise doğrudan Buffer yap
-    input = Buffer.from(src);
+function isSupportedImageFormat(src: string) {
+  return SUPPORTED_IMAGE_FORMATS.some((ext) => src.toLowerCase().endsWith(ext));
+}
+
+export async function generateBlurDataURL(
+  src: string
+): Promise<string | undefined> {
+  let base64: string | undefined;
+
+  if (isSupportedImageFormat(src)) {
+    try {
+      const response = await fetch(src);
+      if (!response.ok) throw new Error(`Failed to fetch image: ${src}`);
+      const buffer = Buffer.from(await response.arrayBuffer());
+      const result = await getPlaiceholder(buffer);
+      base64 = result.base64;
+    } catch (error) {
+      console.warn('Could not generate blur placeholder:', error);
+    }
   }
 
-  // getPlaiceholder hem Buffer hem de string path alabiliyor
-  const { base64 } = await getPlaiceholder(input);
   return base64;
 }

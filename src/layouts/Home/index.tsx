@@ -1,16 +1,19 @@
-// React core
-import React from 'react';
+// Next
+import dynamic from 'next/dynamic';
 
 // UI Components
 import { Section } from '@/components/Section';
 
 // Layouts
 import { LatestPosts } from './LatestPosts';
-import { Posts } from './Posts';
 import { Newsletter } from './Newsletter';
 
 // Types
 import { PostResponse } from '@/types/posts';
+
+// Lazy Imports
+// Lazy loaded components (only loaded when visible)
+const Posts = dynamic(() => import('./Posts/Posts'));
 
 function Home({ posts }: { posts: PostResponse }) {
   return (

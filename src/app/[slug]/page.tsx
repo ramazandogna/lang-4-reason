@@ -10,6 +10,7 @@ import { getPostSlugs } from '@/data/getPostSlugs';
 
 // SEO & Utils
 import { generateMetadata as generateSEOMetadata } from '@/utils/seo';
+import { generateBlurDataURL } from '@/utils/plaiceholder';
 
 // UI Components
 import { Section } from '@/components/Section';
@@ -78,6 +79,13 @@ export default async function PostPage(props: {
   const isValidSlug = slugs?.some((s) => params.slug === s.slug);
   if (!isValidSlug || !post) notFound();
 
+  // Post'un featured image'ı için blur oluştur
+  const postImage =
+    post.featuredImage?.node?.mediaDetails?.sizes?.[0]?.sourceUrl;
+  const blurDataURL = postImage
+    ? await generateBlurDataURL(postImage)
+    : undefined;
+
   return (
     <>
       <StructuredData
@@ -94,7 +102,7 @@ export default async function PostPage(props: {
       />
       {/* Critical content - loads immediately */}
       <Section className="container mx-auto pt-24 pb-0 max-md:pt-16 max-md:pb-10 md:pb-16!">
-        <Hero hero={post} />
+        <Hero hero={{ ...post, blurDataURL }} />
       </Section>
 
       <Section className="container mx-auto my-0! py-0! md:my-0! md:py-0!">

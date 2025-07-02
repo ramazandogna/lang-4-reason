@@ -10,11 +10,16 @@ import Link from '@/components/Link';
 import type { PostNode } from '@/types/posts';
 
 export type ContentCardProps = {
-  post: PostNode & { blurDataURL?: string };
+  post: PostNode;
   readTime?: string;
+  blurDataURL?: string;
 };
 
-export default function ContentCard({ post, readTime }: ContentCardProps) {
+export default function ContentCard({
+  post,
+  readTime,
+  blurDataURL
+}: ContentCardProps) {
   const postImageSrc =
     post.featuredImage?.node?.mediaDetails?.sizes?.[0]?.sourceUrl || '';
   const authorAvatarUrl = post.author?.node?.avatar?.url || '';
@@ -32,8 +37,8 @@ export default function ContentCard({ post, readTime }: ContentCardProps) {
             fill
             className="object-cover"
             sizes="(max-width: 600px) 100vw, 420px"
-            placeholder={post.blurDataURL ? 'blur' : 'empty'}
-            blurDataURL={post.blurDataURL}
+            placeholder={blurDataURL ? 'blur' : 'empty'}
+            blurDataURL={blurDataURL || undefined}
             loading="lazy"
           />
           <Button

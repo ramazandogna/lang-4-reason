@@ -35,8 +35,43 @@ export default function Pagination({
   // Hooks
   const { width, isClient } = useResponsive();
 
-  // SSR protection
-  if (!isClient) return null;
+  // SSR protection - basit fallback render et
+  if (!isClient) {
+    return (
+      <div
+        className={cn(
+          'flex w-full items-center gap-4 text-gray-600',
+          'group',
+          align === 'start' ? 'justify-start' : 'justify-center',
+          className
+        )}
+      >
+        <Button
+          size="sm"
+          variant="primary"
+          color="theme"
+          leftIcon={<ChevronLeft size={16} />}
+          disabled={true}
+          className="text-sm font-semibold transition-all duration-300 disabled:opacity-50"
+        >
+          {showPrevNextText ? PAGINATION_LABELS.prev : null}
+        </Button>
+        <span className="text-md font-semibold">
+          Sayfa {currentPage} of {totalPages}
+        </span>
+        <Button
+          size="sm"
+          variant="primary"
+          color="theme"
+          rightIcon={<ChevronRight size={16} />}
+          disabled={true}
+          className="text-sm font-semibold transition-all duration-300 disabled:opacity-50"
+        >
+          {showPrevNextText ? PAGINATION_LABELS.next : null}
+        </Button>
+      </div>
+    );
+  }
 
   // Mobile Layout - Simplified pagination for small screens
   if (width < 640) {

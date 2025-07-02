@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { PostsCards } from './PostsCards';
+import PostsCards from './PostsCards';
 import { PostsHeader } from './PostsHeader';
 import PostsPagination from './PostsPagination/PostsPagination';
 import { generateNavItems } from '@/components/Navbar';
@@ -33,10 +33,16 @@ export default function Posts({ posts }: { posts: PostResponse }) {
   const navItems = generateNavItems(posts.nodes, activeKey);
 
   function scrollToPostsTop() {
+    // Client-side kontrolü ekle
+    if (typeof window === 'undefined') return;
+
     const el = document.getElementById('posts-section');
     if (!el) return;
+
     const yOffset = -80;
-    const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    const rect = el.getBoundingClientRect();
+    const y = rect.top + window.scrollY + yOffset;
+
     window.scrollTo({ top: y, behavior: 'smooth' });
   }
 
@@ -50,6 +56,9 @@ export default function Posts({ posts }: { posts: PostResponse }) {
         setActiveKey={(key) => {
           setActiveKey(key);
           setCurrentPage(1);
+          setTimeout(() => {
+            scrollToPostsTop();
+          }, 50);
         }}
         navItems={navItems}
       />
@@ -61,7 +70,9 @@ export default function Posts({ posts }: { posts: PostResponse }) {
         totalResults={totalResults}
         onPageChange={(page) => {
           setCurrentPage(page);
-          scrollToPostsTop();
+          setTimeout(() => {
+            scrollToPostsTop();
+          }, 50);
         }}
       />
     </span>

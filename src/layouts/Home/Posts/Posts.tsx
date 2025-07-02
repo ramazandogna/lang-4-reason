@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useState } from 'react';
-import { PostsCards } from '../PostDetail/PostsCards';
-import { PostsHeader } from '../PostDetail/PostsHeader';
-import PostsPagination from '../PostDetail/PostsPagination/PostsPagination';
+import { PostsCards } from '../PostNavbar/PostsCards';
+import { PostsHeader } from '../PostNavbar/PostsHeader';
+import PostsPagination from '../PostNavbar/PostsPagination/PostsPagination';
 import { generateNavItems } from '@/components/Navbar/Navbar.constants';
 import type { PostResponse } from '@/types/posts';
 
@@ -33,10 +33,16 @@ export default function Posts({ posts }: { posts: PostResponse }) {
   const navItems = generateNavItems(posts.nodes, activeKey);
 
   function scrollToPostsTop() {
+    // Client-side kontrolü ekle
+    if (typeof window === 'undefined') return;
+
     const el = document.getElementById('posts-section');
     if (!el) return;
+
     const yOffset = -80;
-    const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    const rect = el.getBoundingClientRect();
+    const y = rect.top + window.scrollY + yOffset;
+
     window.scrollTo({ top: y, behavior: 'smooth' });
   }
 
@@ -45,16 +51,22 @@ export default function Posts({ posts }: { posts: PostResponse }) {
     // Her durumda scroll yap (sayfa değişse de değişmese de)
     setTimeout(() => {
       scrollToPostsTop();
-    }, 10); // Küçük bir delay ile state update'i bekle
+    }, 50); // Küçük bir delay ile state update'i bekle
   }
 
   return (
-    <span className="flex flex-col gap-[64px] pt-4 max-md:gap-[40px]">
+    <span
+      id="posts-section"
+      className="flex flex-col gap-[64px] pt-4 max-md:gap-[40px]"
+    >
       <PostsHeader
         activeKey={activeKey}
         setActiveKey={(key) => {
           setActiveKey(key);
           setCurrentPage(1);
+          setTimeout(() => {
+            scrollToPostsTop();
+          }, 50);
         }}
         navItems={navItems}
       />
