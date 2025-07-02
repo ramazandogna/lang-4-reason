@@ -6,11 +6,7 @@ import { Content } from '@/layouts/PostDetail/Content';
 import { LatestContent } from '@/layouts/PostDetail/Content/LatestContent';
 import { Newsletter } from '@/layouts/Home/Newsletter';
 
-type Props = {
-  params: { slug: string };
-};
-
-export default function PostPage({ params }: Props) {
+export default function PostPage({ params }: { params: { slug: string } }) {
   const post = mockPosts.find((p) => p.slug === params.slug);
 
   if (!post) return notFound();
