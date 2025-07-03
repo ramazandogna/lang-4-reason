@@ -1,6 +1,8 @@
 // React & Next core imports
 'use client';
 
+import { useState, useEffect } from 'react';
+
 // UI Components
 import { Button } from '@/components/Button';
 
@@ -35,46 +37,33 @@ export default function Pagination({
   // Hooks
   const { width, isClient } = useResponsive();
 
-  // SSR protection - basit fallback render et
-  if (!isClient) {
-    return (
-      <div
-        className={cn(
-          'flex w-full items-center gap-4 text-gray-600',
-          'group',
-          align === 'start' ? 'justify-start' : 'justify-center',
-          className
-        )}
-      >
-        <Button
-          size="sm"
-          variant="primary"
-          color="theme"
-          leftIcon={<ChevronLeft size={16} />}
-          disabled={true}
-          className="text-sm font-semibold transition-all duration-300 disabled:opacity-50"
-        >
-          {showPrevNextText ? PAGINATION_LABELS.prev : null}
-        </Button>
-        <span className="text-md font-semibold">
-          Sayfa {currentPage} of {totalPages}
-        </span>
-        <Button
-          size="sm"
-          variant="primary"
-          color="theme"
-          rightIcon={<ChevronRight size={16} />}
-          disabled={true}
-          className="text-sm font-semibold transition-all duration-300 disabled:opacity-50"
-        >
-          {showPrevNextText ? PAGINATION_LABELS.next : null}
-        </Button>
-      </div>
-    );
+  // Hydration için state
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Component mount olduktan sonra responsive kontrolü yap
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // Hydration hatası önleme - ilk render'da her zaman desktop layout göster
+  const shouldShowMobileLayout = isMounted && isClient && width < 640;
+
+  // Create page array with ellipsis logic
+  const pages: PageItem[] = [];
+  for (let i = 1; i <= totalPages; i++) {
+    if (i <= 4 || i === currentPage || i > totalPages - 2) {
+      pages.push(i);
+    } else if (i === 5 && currentPage > 5 && !pages.includes('ellipsis')) {
+      pages.push('ellipsis');
+    }
   }
 
-  // Mobile Layout - Simplified pagination for small screens
-  if (width < 640) {
+  // Calculate display values
+  const endItem = Math.min(currentPage * pageSize, totalResults);
+  const justifyClass = align === 'start' ? 'justify-start' : 'justify-center';
+
+  // Mobile Layout - Hydration sonrası göster
+  if (shouldShowMobileLayout) {
     return (
       <div className="flex w-full items-center justify-center gap-4 py-2">
         {/* Previous Button */}
@@ -86,7 +75,7 @@ export default function Pagination({
           onClick={() => onPageChange?.(Math.max(1, currentPage - 1))}
           disabled={currentPage === 1}
           iconOnly
-          className="text-sm font-semibold transition-all duration-300 hover:text-[var(--accent)] disabled:opacity-50"
+          className="text-sm font-semibold transition-all duration-300 hover:text-[var(--accent)]! disabled:opacity-50"
         />
 
         {/* Page Indicator */}
@@ -116,22 +105,7 @@ export default function Pagination({
     );
   }
 
-  // Desktop Layout - Full pagination with page numbers
-
-  // Create page array with ellipsis logic
-  const pages: PageItem[] = [];
-  for (let i = 1; i <= totalPages; i++) {
-    if (i <= 4 || i === currentPage || i > totalPages - 2) {
-      pages.push(i);
-    } else if (i === 5 && currentPage > 5 && !pages.includes('ellipsis')) {
-      pages.push('ellipsis');
-    }
-  }
-
-  // Calculate display values
-  const endItem = Math.min(currentPage * pageSize, totalResults);
-  const justifyClass = align === 'start' ? 'justify-start' : 'justify-center';
-
+  // Desktop Layout - Default layout (SSR'da da bu görünecek)
   return (
     <div
       className={cn(
@@ -191,7 +165,7 @@ export default function Pagination({
         rightIcon={<ChevronRight size={16} />}
         onClick={() => onPageChange?.(Math.min(totalPages, currentPage + 1))}
         disabled={currentPage === totalPages}
-        className="text-sm font-semibold transition-all duration-300 hover:text-[var(--accent)]! disabled:opacity-50"
+        className="text-sm font-semibold transition-all duration-300 hover:text-[var(--accent)] disabled:opacity-50"
       >
         {showPrevNextText ? PAGINATION_LABELS.next : null}
       </Button>
