@@ -29,7 +29,7 @@ function HeroTitle({ hero }: { hero: PostType }) {
         {finalDate}
       </div>
       <h2 className="fade-up fade-up-delay-2">{hero.title}</h2>
-      <div className="group flex justify-center gap-2">
+      <div className="group flex flex-wrap justify-center gap-2">
         {hero.categories &&
           hero.categories.nodes.map((category, idx) => (
             <Link

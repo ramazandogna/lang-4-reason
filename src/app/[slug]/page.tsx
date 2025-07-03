@@ -101,7 +101,7 @@ export default async function PostPage(props: {
         author={post.author.node.name}
       />
       {/* Critical content - loads immediately */}
-      <Section className="container mx-auto pt-24 pb-0 max-md:pt-16 max-md:pb-10 md:pb-16!">
+      <Section className="container mx-auto max-md:pt-[40px]! max-md:pb-0! md:pb-16!">
         <Hero hero={{ ...post, blurDataURL }} />
       </Section>
 
@@ -119,7 +119,7 @@ export default async function PostPage(props: {
           </Section>
         }
       >
-        <Section className="container mx-auto">
+        <Section className="container mx-auto max-md:pt-0!">
           <LatestContent />
         </Section>
       </Suspense>

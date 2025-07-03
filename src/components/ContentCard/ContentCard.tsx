@@ -15,6 +15,9 @@ export type ContentCardProps = {
   blurDataURL?: string;
 };
 
+// Default blurhash'i burada tanımlıyoruz.
+const DEFAULT_BLUR_HASH = 'LBC}oL=A+W;1OaJAw|t90cAD-akZ';
+
 export default function ContentCard({
   post,
   readTime,
@@ -37,8 +40,8 @@ export default function ContentCard({
             fill
             className="object-cover"
             sizes="(max-width: 600px) 100vw, 420px"
-            placeholder={blurDataURL ? 'blur' : 'empty'}
-            blurDataURL={blurDataURL || undefined}
+            placeholder="blur"
+            blurDataURL={blurDataURL || DEFAULT_BLUR_HASH}
             loading="lazy"
           />
           <Button

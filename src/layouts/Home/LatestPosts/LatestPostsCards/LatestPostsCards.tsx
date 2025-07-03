@@ -3,21 +3,33 @@ import { ContentCard } from '@/components/ContentCard';
 
 // Types
 import { PostNode, PostResponse } from '@/types/posts';
+import { generateBlurDataURL } from '@/utils/plaiceholder';
 
-function LatestPostsCards({
-  posts,
-  blurDataURL
+async function getPostsWithBlur(posts: PostNode[]) {
+  return Promise.all(
+    posts.map(async (post) => {
+      const src = post.featuredImage?.node?.mediaDetails?.sizes?.[0]?.sourceUrl;
+      const blurDataURL = src ? await generateBlurDataURL(src) : undefined;
+      return { ...post, blurDataURL };
+    })
+  );
+}
+
+export default async function LatestPostsCards({
+  posts
 }: {
   posts: PostResponse;
-  blurDataURL?: string;
 }) {
+  const postsWithBlur = await getPostsWithBlur(posts.nodes.slice(0, 6));
   return (
     <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3">
-      {posts.nodes.slice(0, 3).map((post: PostNode) => (
-        <ContentCard key={post.slug} post={post} blurDataURL={blurDataURL} />
+      {postsWithBlur.map((post) => (
+        <ContentCard
+          key={post.slug}
+          post={post}
+          blurDataURL={post.blurDataURL}
+        />
       ))}
     </div>
   );
 }
-
-export default LatestPostsCards;

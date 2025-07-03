@@ -16,7 +16,6 @@ import getAllPosts from '@/data/getAllPosts';
 // SEO & Utils
 import { generateMetadata as generateSEOMetadata } from '@/utils/seo';
 import { SITE, SEO } from '@/constant';
-import { generateBlurDataURL } from '@/utils/plaiceholder';
 
 // Lazy loaded components (only loaded when visible)
 const Posts = dynamic(() => import('@/layouts/Home/Posts/Posts'));
@@ -40,16 +39,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function HomePage() {
-  // Fetch posts server-side
   const posts = await getAllPosts('', null, 100);
-
-  // İlk post'un featured image'ı için blur oluştur
-  const firstPostImage =
-    posts.nodes[0]?.featuredImage?.node?.mediaDetails?.sizes?.[0]?.sourceUrl;
-  const blurDataURL = firstPostImage
-    ? await generateBlurDataURL(firstPostImage)
-    : undefined;
-
   return (
     <>
       <StructuredData
@@ -59,10 +49,9 @@ export default async function HomePage() {
         url={SITE.URL}
         type="WebSite"
       />
-
       {/* Critical content - loads immediately */}
       <Section className="container mx-auto w-full pt-16 max-md:pt-8">
-        <LatestPosts posts={posts} blurDataURL={blurDataURL} />
+        <LatestPosts posts={posts} />
       </Section>
 
       {/* Below-the-fold content - lazy loaded */}

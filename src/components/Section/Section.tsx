@@ -6,7 +6,9 @@ function Section({
   className?: string;
 }) {
   return (
-    <section className={`${className} flex flex-col py-[96px]! max-md:py-16`}>
+    <section
+      className={`${className} flex flex-col py-[64px]! max-md:py-[40px]`}
+    >
       {children}
     </section>
   );

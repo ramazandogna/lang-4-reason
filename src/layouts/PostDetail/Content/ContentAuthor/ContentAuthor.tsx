@@ -33,7 +33,7 @@ export default function ContentAuthor({
   };
 
   return (
-    <div className="flex items-center justify-between gap-3">
+    <div className="flex items-center justify-between gap-3 max-md:flex-col max-md:items-start max-md:justify-start">
       <div className="flex items-center gap-3">
         <Link href={`/author/${contentAuthor.slug}`}>
           <Image
@@ -53,7 +53,7 @@ export default function ContentAuthor({
           <div className="text-gray-400">Product Designer in Rei Product</div>
         </div>
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex flex-wrap items-center gap-2">
         <Button
           variant="secondary"
           color="gray"

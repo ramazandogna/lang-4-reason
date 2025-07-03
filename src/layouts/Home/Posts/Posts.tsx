@@ -57,7 +57,7 @@ export default function Posts({ posts }: { posts: PostResponse }) {
   return (
     <span
       id="posts-section"
-      className="flex flex-col gap-[64px] pt-4 max-md:gap-[40px]"
+      className="flex flex-col gap-[40px] pt-4 max-md:gap-[32px]"
     >
       <PostsHeader
         activeKey={activeKey}

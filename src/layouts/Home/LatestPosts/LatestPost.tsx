@@ -8,17 +8,11 @@ import { LatestPostsCards } from './LatestPostsCards';
 // Types
 import { PostResponse } from '@/types/posts';
 
-export default function LatestPosts({
-  posts,
-  blurDataURL
-}: {
-  posts: PostResponse;
-  blurDataURL?: string;
-}) {
+export default function LatestPosts({ posts }: { posts: PostResponse }) {
   return (
     <span className="flex flex-col gap-[64px]">
       <LatestPostsTitle />
-      <LatestPostsCards posts={posts} blurDataURL={blurDataURL} />
+      <LatestPostsCards posts={posts} />
     </span>
   );
 }
