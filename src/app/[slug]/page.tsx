@@ -34,7 +34,7 @@ export async function generateStaticParams() {
 }
 
 export const dynamicParams = false;
-export const revalidate = 60; // 1 hour cache
+export const revalidate = 7200; // 2 hour cache
 
 export async function generateMetadata(props: {
   params: Promise<{ slug: string }>;

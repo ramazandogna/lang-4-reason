@@ -24,7 +24,7 @@ const Newsletter = dynamic(
 );
 
 // Revalidation config
-export const revalidate = 60; // 1 hour cache
+export const revalidate = 3600; // 1h
 export const dynamicParams = false;
 
 // SEO Metadata
