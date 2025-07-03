@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import PostsCards from './PostsCards';
+import { PostsCards } from './PostsCards';
 import { PostsHeader } from './PostsHeader';
 import PostsPagination from './PostsPagination/PostsPagination';
 import { generateNavItems } from '@/components/Navbar';

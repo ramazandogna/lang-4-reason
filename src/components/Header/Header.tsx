@@ -12,16 +12,16 @@ import HamburgerIcon from '@/components/HamburgerIcon';
 import { SunMoon } from 'lucide-react';
 
 // Context & Providers
-import { useTheme } from '@/app/theme-provider';
+import { useTheme } from '../../app/theme-provider';
 import { useResponsive } from '@/context/ResponsiveContext';
 
 // Constants
 const navItems = [
   { name: 'Ana sayfa', path: '/' },
   { name: 'Yeni', path: '/new' },
-  { name: 'Popüler', path: '/Popular' },
-  { name: 'Okuma listesi', path: '/ReadingList' },
-  { name: 'Typography', path: '/Typography' }
+  { name: 'Popüler', path: '/popular' },
+  { name: 'Okuma listesi', path: '/readingList' },
+  { name: 'Typography', path: '/typography' }
 ];
 
 export default function Header() {
