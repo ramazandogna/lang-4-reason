@@ -11,15 +11,7 @@ export default function Post({ post }: { post: string }) {
         domNode.name === 'img'
       ) {
         const { src, alt } = domNode.attribs;
-        return (
-          <PostImage
-            src={src}
-            alt={alt}
-            width={700}
-            height={475}
-            layout="responsive"
-          />
-        );
+        return <PostImage src={src} alt={alt} width={700} height={475} />;
       }
     }
   };

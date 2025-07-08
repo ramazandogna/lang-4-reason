@@ -24,7 +24,7 @@ export default function GetMorePost({
     }
     const response = await fetch(`/api/posts?${params.toString()}`);
     const morePost = await response.json();
-    let updatePosts: PostResponse = {
+    const updatePosts: PostResponse = {
       pageInfo: morePost.pageInfo,
       nodes: [...contents.nodes, ...morePost.nodes]
     };

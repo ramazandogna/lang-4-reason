@@ -11,14 +11,12 @@ export default async function PostImage({
   src,
   alt,
   width,
-  height,
-  layout
+  height
 }: {
   src: string;
   alt: string;
   width: number;
   height: number;
-  layout: string;
 }) {
   let base64: string | undefined;
 
