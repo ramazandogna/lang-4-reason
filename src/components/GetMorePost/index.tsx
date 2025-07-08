@@ -17,10 +17,11 @@ export default function GetMorePost({
   const getMorePost = async () => {
     if (postsLoading || noMorePost) return;
     setPostsLoading(true);
-    const params = new URLSearchParams({
-      cursor: contents.pageInfo.endCursor || '',
-      category: taxonomy.value || ''
-    });
+    const params = new URLSearchParams();
+    params.set('cursor', contents.pageInfo.endCursor || '');
+    if (taxonomy.key && taxonomy.value) {
+      params.set(taxonomy.key, taxonomy.value);
+    }
     const response = await fetch(`/api/posts?${params.toString()}`);
     const morePost = await response.json();
     let updatePosts: PostResponse = {
