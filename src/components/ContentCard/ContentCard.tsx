@@ -29,16 +29,13 @@ export default function ContentCard({
 
   return (
     <div className="flex flex-col overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm transition hover:shadow-lg">
-      <div className="relative h-[220px] w-full overflow-hidden rounded-3xl">
-        <Link
-          href={`/${post.slug}`}
-          className="group inset-0 flex cursor-pointer"
-        >
+      <Link href={`/${post.slug}`} className="inset-0 flex cursor-pointer">
+        <div className="group relative h-[220px] w-full overflow-hidden rounded-3xl">
           <Image
             src={postImageSrc}
             alt={post.title}
             fill
-            className="object-cover"
+            className="object-cover transition-transform duration-500 ease-in-out group-hover:scale-110 group-hover:rotate-5"
             sizes="(max-width: 600px) 100vw, 420px"
             placeholder="blur"
             blurDataURL={blurDataURL || DEFAULT_BLUR_HASH}
@@ -47,14 +44,14 @@ export default function ContentCard({
           <Button
             rightIcon={
               <ArrowUpRight
-                className="m-auto text-white transition-all duration-300 group-hover:scale-105 group-hover:rotate-45"
+                className="m-auto text-white/60 transition-all duration-300 group-hover:scale-105 group-hover:rotate-45 group-hover:text-white"
                 size={20}
               />
             }
-            className="absolute right-4 bottom-4 z-10 flex h-10 w-10 items-center justify-center rounded-full border-2 border-white/60 bg-transparent backdrop-blur-sm transition group-hover:border-white/80 hover:scale-105 hover:bg-transparent"
+            className="absolute right-4 bottom-4 z-10 flex h-10 w-10 items-center justify-center rounded-full border-2 border-white/60 bg-transparent backdrop-blur-sm transition ease-in-out group-hover:scale-110 group-hover:border-white hover:bg-transparent"
           />
-        </Link>
-      </div>
+        </div>
+      </Link>
 
       <div className="flex flex-col gap-2 p-6 pb-4">
         <span className="mb-2 text-xs font-bold text-indigo-600">
